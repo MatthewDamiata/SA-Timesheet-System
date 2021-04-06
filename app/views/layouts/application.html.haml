@@ -1,10 +1,15 @@
 !!!
 %html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title SA
-    = stylesheet_link_tag    'application', media: 'all'
+  %body
+    %title SA Timesheet
+    %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity: "sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", rel: "stylesheet"}/
+    = stylesheet_link_tag 'application', 'media' => 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-  %body
-    = yield
+    %nav.navbar.navbar-expand-lg.bg-success.text-white.mb-3
+      = image_tag "SAlogo.png"
+      %h1.title SA Timesheet
+    .container
+      = render 'layouts/flash'
+      %main#main
+        = yield
