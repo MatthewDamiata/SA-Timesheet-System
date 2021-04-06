@@ -18,8 +18,8 @@ module NavigationHelpers
 			
 	 when /^the landing page$/
 			'/'
-	 when /^the login page$/ 
-			'/'
+			
+	 when /^the login page$/ then '/login'
 			
 			
 

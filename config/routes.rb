@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+	
+
+	
   root 'timesheets#landing'
+	#login_timesheet 'timesheets#login'
+	resources :timesheets do  
+  
+      get "login"
+   
+  end
+	
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
