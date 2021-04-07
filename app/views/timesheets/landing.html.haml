@@ -2,8 +2,8 @@
 %h2 Login or Register
 
 
-= button_to "Login", timesheet_login_path, method: :get
+= button_to "Login", login_path, method: :get, class: 'btn btn-primary primary-button'
 
 %br
 %br
-= button_tag 'Register', type: 'submit', class: 'btn btn-primary primary-button'
+= button_to "Register", register_path, method: :get, class: 'btn btn-primary primary-button'

@@ -6,11 +6,9 @@ Rails.application.routes.draw do
 	
   root 'timesheets#landing'
 	#login_timesheet 'timesheets#login'
-	resources :timesheets do  
-  
-      get "login"
-   
-  end
+
+	get 'login', to: 'timesheets#login'
+	get 'register', to: 'timesheets#register'
 	
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

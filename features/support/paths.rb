@@ -20,7 +20,7 @@ module NavigationHelpers
 			'/'
 			
 	 when /^the login page$/ then '/login'
-			
+	 when /^the register page$/ then '/register'
 			
 
 
