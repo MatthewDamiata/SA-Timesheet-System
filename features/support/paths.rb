@@ -20,8 +20,11 @@ module NavigationHelpers
 			'/'
 			
 	 when /^the login page$/ then '/login'
+     
 	 when /^the register page$/ then '/register'
-			
+     
+   when /^press the logo$/ then
+     find('SAlogo.png').click
 
 
     # Add more mappings here.

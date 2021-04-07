@@ -16,4 +16,9 @@ Feature: Landing Page
 	  When I go to the landing page
 		When I press "Register"
 		Then I should be on the register page
+  
+  Scenario: User clicks on the logo
+    When I press logo
+    Then I should be on the landing page
+    
 	

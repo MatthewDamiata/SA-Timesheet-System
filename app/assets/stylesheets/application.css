@@ -13,12 +13,18 @@
  *= require_tree .
  *= require_self
  */
-.style_logo {
-  width: 7%;
-  height: 7%;
-}
 
 .banner_text{
-  margin-left: 36%;
-  font-size: 25px;
+    position: absolute; /*or fixed*/
+    right: 20px;
+    font-size: 25px;
+}
+
+.landing_text{
+  font-size: 32px;
+}
+
+.row_with_padding {
+    margin-right: 10px;
+    margin: 0px 0px 50px 15px;
 }

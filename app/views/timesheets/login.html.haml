@@ -1,0 +1,14 @@
+%h2 Login Here
+
+%form
+  = label :user, :email, "Email:"
+  %br
+  = text_field :user, :email
+  %br
+  %br
+  = label :user, :password, "Password:"
+  %br
+  = password_field :user, :password
+  %br
+  %br
+  %input{:type => "submit", :value => "Sign in", class: 'btn btn-light bg-dark text-light white primary-button'}
