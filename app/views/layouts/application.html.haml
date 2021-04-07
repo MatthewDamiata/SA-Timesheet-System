@@ -7,8 +7,8 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     %nav.navbar.navbar-expand-lg.bg-success.text-white.mb-3
-      = image_tag "SAlogo.png"
-      %h1.title SA Timesheet
+      = image_tag "SAlogo.png", :class => "style_logo"
+      .banner_text Employee Time Sheet
     .container
       = render 'layouts/flash'
       %main#main

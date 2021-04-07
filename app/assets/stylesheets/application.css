@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+.style_logo {
+  width: 7%;
+  height: 7%;
+}
+
+.banner_text{
+  margin-left: 36%;
+  font-size: 25px;
+}

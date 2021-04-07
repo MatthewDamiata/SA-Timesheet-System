@@ -1,9 +1,5 @@
-%center
-%h2 Login or Register
+%h2 Login or Register,
 
-
-= button_to "Login", login_path, method: :get, class: 'btn btn-primary primary-button'
-
-%br
-%br
-= button_to "Register", register_path, method: :get, class: 'btn btn-primary primary-button'
+.row
+  = button_to "Login", login_path, method: :get, class: 'btn btn-primary primary-button'
+  = button_to "Register", register_path, method: :get, class: 'btn btn-primary primary-button'
