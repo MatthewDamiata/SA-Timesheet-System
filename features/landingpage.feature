@@ -5,7 +5,8 @@ Feature: Landing Page
 	
 	Scenario: User see the landing page
 		When I go to the landing page
-		Then I should see "Login or Register"
+    Then I should see "Hello"
+    Then I should see "Welcome to the Binghamton Student Association Timesheet System"
 	
 	Scenario: User clicks on Login button
 	  When I go to the landing page
@@ -18,7 +19,7 @@ Feature: Landing Page
 		Then I should be on the register page
   
   Scenario: User clicks on the logo
-    When I press logo
+    When I press the logo
     Then I should be on the landing page
     
 	

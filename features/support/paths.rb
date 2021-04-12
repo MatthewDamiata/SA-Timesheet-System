@@ -18,12 +18,12 @@ module NavigationHelpers
 			
 	 when /^the landing page$/
 			'/'
-			
+
 	 when /^the login page$/ then '/login'
      
 	 when /^the register page$/ then '/register'
      
-   when /^press the logo$/ then
+   when /^press the (.*)$/ then
      find('SAlogo.png').click
 
 
