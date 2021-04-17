@@ -1,14 +1,14 @@
-Feature: Login Page
+Feature: Register Page
 	As a developer
 	I want SA employees to be able to register
 	So that they can create an account
   
 Scenario: User clicks on Register button
-  When I go to the landing page
-	When I press "Register"
-  Then I should be on the register page
-    
-  
+  Given I am on the landing page
+  And I press "Register"
+  Then I am on the register page
+  And I should see message "Welcome Tester Suny! You have signed up via GitHub."
+ 
 Scenario: User is on login page
   When I go to the login page
   Then I should see "Register Here"
@@ -16,3 +16,12 @@ Scenario: User is on login page
   Then I should see "Password:"
   Then I should see "Confirm Password:"
   Then I should see "Register"
+	
+Scenario:  Can't Register without SUNY ID
+  Given I am on the landing page
+  And I press "Register"
+  Then I should see message "Only Students and Staff belonging to SUNY Binghamton can register for this app"
+
+	
+	
+	
