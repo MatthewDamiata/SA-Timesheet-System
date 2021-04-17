@@ -2,5 +2,5 @@
 %h2 Welcome to the Binghamton Student Association Timesheet System
 .row
   = button_to "Login", login_path, method: :get, class: 'btn btn-light bg-dark text-light white row_with_padding'
-  = button_to "Register", register_path, method: :get, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = button_to "Register", '/auth/github', class: 'btn btn-light bg-dark text-light white row_with_padding'
 = image_tag "baxter.jpeg", :style => "height: 30%; width: 30%; border-radius: 30px;"

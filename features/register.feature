@@ -9,13 +9,13 @@ Scenario: User clicks on Register button
   Then I am on the register page
   And I should see message "Welcome Tester Suny! You have signed up via GitHub."
  
-Scenario: User is on login page
-  When I go to the login page
-  Then I should see "Register Here"
-  Then I should see "Email:"
-  Then I should see "Password:"
-  Then I should see "Confirm Password:"
-  Then I should see "Register"
+#Scenario: User is on register page
+#  When I go to the login page
+#  Then I should see "Register Here"
+#  Then I should see "Email:"
+#  Then I should see "Password:"
+#  Then I should see "Confirm Password:"
+#  Then I should see "Register"
 	
 Scenario:  Can't Register without SUNY ID
   Given I am on the landing page
