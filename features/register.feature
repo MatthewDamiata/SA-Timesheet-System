@@ -7,7 +7,7 @@ Feature: Register Page
 Scenario: User clicks on Register button
   Given I am on the landing page
   And I press "Register"
-  Then I am on Timesheets new Profile page
+  Then I am on the Timesheets new Profile page
   And I should see message "Welcome Tester Suny! You have signed up via GitHub."
  
 #Scenario: User is on register page
