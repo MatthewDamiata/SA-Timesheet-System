@@ -19,9 +19,8 @@ module NavigationHelpers
 	 when /^the landing page$/
 			'/'
 
-	 when /^the login page$/ then '/login'
-     
-	 when /^the register page$/ then '/register'
+	when /^the Timesheets new Profile page$/
+			sessions_create_path
      
    when /^press the (.*)$/ then
      find('SAlogo.png').click
