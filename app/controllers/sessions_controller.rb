@@ -26,8 +26,8 @@ class SessionsController < ApplicationController
 
   def create
 		auth_hash = request.env['omniauth.auth']
-  p auth_hash
-		    
+    p auth_hash
+  		    
     puts '\n raw auth_hash\n'
     p auth_hash
     puts '\n\nauth_hash by key\n'
