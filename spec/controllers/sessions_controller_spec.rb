@@ -2,53 +2,44 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
 
-  describe "GET #start_test" do
-    it "returns http success" do
-      get :start_test
-      expect(response).to have_http_status(:success)
-    end
-  end
+ # spec/controllers/sessions_controller_spec.rb
 
-  describe "GET #clear" do
-    it "returns http success" do
-      get :clear
-      expect(response).to have_http_status(:success)
-    end
-  end
+# ...
 
-  describe "GET #debug" do
-    it "returns http success" do
-      get :debug
-      expect(response).to have_http_status(:success)
+ describe "#create" do
+    context "no active session, User and Authorization do not exist" do 
+			before do
+        session[:user_id] = nil
+          # Database has been cleaned, so shouldn't have to worry about User and Authorization
+      end 
+      context 'register with github' do
+        describe 'When signing up for first time' do
+          it "creates a User" do
+					  expect { post :create, provider: :github }.to change(User, :count).by(1)
+          end        
+          it "creates an Authorization" do
+			
+						post :create, provider: :github
+          end
+          it "creates a session" do 
+						 post :create, provider: :github
+          end
+          it "creates a current_user" do
+						 post :create, provider: :github
+          end
+        end
+        describe 'After successful registration' do
+          it "sets a flash message" do
+						 post :create, provider: :github
+          end 
+          it "creates an empty user profile" do
+						 post :create, provider: :github
+          end
+          # Finally, we should test where it's going
+          it "redirects to the edit profile page" do 
+          end
+        end
+      end
     end
-  end
-
-  describe "GET #new" do
-    it "returns http success" do
-      get :new
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #failure" do
-    it "returns http success" do
-      get :failure
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
-
+end
 end

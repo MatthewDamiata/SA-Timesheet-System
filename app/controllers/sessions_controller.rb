@@ -19,12 +19,6 @@ class SessionsController < ApplicationController
   end
 
   def debug
-  end
-
-  def new
-  end
-
-  def create
 		auth_hash = request.env['omniauth.auth']
     p auth_hash
   		    
@@ -41,10 +35,23 @@ class SessionsController < ApplicationController
     end
   end
 
+  def new
+  end
+
+  def create
+	  user = User.create!("name" => auth_hash[:info][:name], "email" => auth_hash[:info][:email])
+  end
+
   def failure
 		
   end
 
   def destroy
+  end
+	
+  private 
+  def auth_hash
+    #ensures that it's only retrieved once per cycle
+    @auth_hash ||= request.env['omniauth.auth']
   end
 end
