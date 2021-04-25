@@ -21,6 +21,9 @@ module NavigationHelpers
 
 	when /^the Timesheets new Profile page$/
 			sessions_create_path
+	
+	 when /^the Timesheets edit Profile Path for "([^"]*)"$/
+      edit_user_profile_path(1, 2)
      
    when /^press the (.*)$/ then
      find('SAlogo.png').click
