@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   get 'sessions/start_test'
   
   get 'sessions/clear'
@@ -25,6 +26,10 @@ Rails.application.routes.draw do
   get 'sessions/destroy', :as => 'logout'
   get 'sessions/clear'
   get 'session/debug'
+
+	resources :users, only: [:destroy] do
+    resources :profiles, only: [:show, :edit, :update, :destroy]
+  end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

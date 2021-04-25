@@ -1,0 +1,31 @@
+%h1 Listing profiles
+
+%table
+  %thead
+    %tr
+      %th Privilege
+      %th Org
+      %th Org2
+      %th Grad
+      %th Manager
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @profiles.each do |profile|
+      %tr
+        %td= profile.privilege
+        %td= profile.org
+        %td= profile.org2
+        %td= profile.grad
+        %td= profile.manager_id
+        %td= profile.user
+        %td= link_to 'Show', profile
+        %td= link_to 'Edit', edit_profile_path(profile)
+        %td= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Profile', new_profile_path
