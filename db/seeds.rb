@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+profiles = [{:org => 123, :org2 => 321, :manager_id => 5, :privilege => 1, :grad => 1}
+     ]
+
+profiles.each do |profile|
+  Profile.create!(profile)
+end
