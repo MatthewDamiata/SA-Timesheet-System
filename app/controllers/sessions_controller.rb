@@ -40,7 +40,7 @@ SA-Timesheet-System/app/controllers/sessions_controller.rb
   end
 
   def create
-     
+    begin
 		@user = User.create_with_omniauth(auth_hash['info'])
 	  auth = Authorization.create_with_omniauth(auth_hash, @user)
 		session[:user_id] = auth.user.id
@@ -50,6 +50,10 @@ SA-Timesheet-System/app/controllers/sessions_controller.rb
     flash[:notice] = message
 		redirect_to edit_user_profile_path(@user,@profile) 
 	  #user = User.create!("name" => auth_hash[:info][:name], "email" => auth_hash[:info][:email])
+		rescue ActiveRecord::RecordInvalid,  Exception => exception
+			flash[:warning] = "#{exception.class}: #{exception.message}" 
+      redirect_to timesheets_landing_path and return
+		end
 		
   end
 

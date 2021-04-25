@@ -29,7 +29,8 @@ Scenario: User clicks on Register button
 Scenario:  Can't Register without SUNY ID
   Given I am on the landing page
   And I press "Register"
-  Then I should see message "Only Students and Staff belonging to SUNY Binghamton can register for this app"
+  Then I will see "ActiveRecord::RecordInvalid: Validation failed: Email must be for Binghamton University"
+  And I am on the landing page
 
 	
 	
