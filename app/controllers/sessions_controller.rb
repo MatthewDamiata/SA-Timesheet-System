@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
     p auth_hash
   		    
     puts '\n raw auth_hash\n'
-SA-Timesheet-System/app/controllers/sessions_controller.rb
     p auth_hash
     puts '\n\nauth_hash by key\n'
     auth_hash.each_pair do |key, value|
