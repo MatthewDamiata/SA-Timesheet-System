@@ -7,11 +7,53 @@ RSpec.describe SessionsController, type: :controller do
 # ...
 
  describe "#create" do
+	  context "no active session, User and Authorization already exist" do
+      context "Login with github" do
+				before(:each) do
+          session[:user_id] = nil    
+
+          @user = User.create!(name: 'SUNY Tester', email: 'stester@binghamton.edu')
+          @auth = Authorization.create!(provider: "github", uid: "123456", user_id: @user.id)
+
+        end 
+        describe 'When logging in a registered user' do
+					let(:id1)  {1}
+          let(:user_id1) {1}
+          let(:auth1) {@auth}
+          let(:user1) {@user}
+          it "checks to see if a previous authorization exists" do
+						 post :create, provider: :github
+          end
+          it 'recovers the previous authorization' do
+						 post :create, provider: :github
+          end
+          it 'recovers the previous user' do
+						 post :create, provider: :github
+          end
+          it 'sets the session' do
+						 post :create, provider: :github
+          end
+          it 'sets the current user' do
+						 post :create, provider: :github
+          end
+          it 'sets a flash message' do
+						 post :create, provider: :github
+          end
+          it 'redirects to the home page' do
+						 post :create, provider: :github
+          end
+					it 'checks to see that a previous authorization does not exist' do
+						 post :create, provider: :github
+          end  
+        end
+      end
+		end
     context "no active session, User and Authorization do not exist" do 
 			before do
         session[:user_id] = nil
           # Database has been cleaned, so shouldn't have to worry about User and Authorization
       end 
+			
       context 'register with github' do
 			  let(:auth) {double('Authorization', provider: "github", uid: "123456", user_id: id1, user: double('User', name: 'SUNY Tester', email: 'stester@binghamton.edu', id: id1))} 
         describe 'When signing up for first time' do
