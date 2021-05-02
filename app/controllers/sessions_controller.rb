@@ -42,20 +42,27 @@ class SessionsController < ApplicationController
     begin
 		  if Authorization.exists?(auth_hash)
         # indent code
+# 				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
+#         flash[:notice] = message
       
       else # immediately before your register code
         # indent code
-        
+#          message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
+# 				 flash[:notice] = message
       end
 		@user = User.create_with_omniauth(auth_hash['info'])
+		
 	  auth = Authorization.create_with_omniauth(auth_hash, @user)
 		auth = Authorization.find_with_auth_hash(auth_hash)
 	  @user = User.find_with_auth_hash(auth_hash['info'])
-		session[:user_id] = auth.user.id
+		session[:user_id] = auth.user.id 
+		
 		self.current_user= auth.user
+		
 		@profile = @user.create_profile
 	  message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
     flash[:notice] = message
+		
 		redirect_to edit_user_profile_path(@user,@profile) 
 	  #user = User.create!("name" => auth_hash[:info][:name], "email" => auth_hash[:info][:email])
 		rescue ActiveRecord::RecordInvalid,  Exception => exception
