@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+	 skip_before_action :keep_out_unless_logged_in, only: [:create, :clear, :debug]  
 	 def nested_hash nh, indent
     puts indent + "VALUE is a nested hash"
     indent += '  '
@@ -33,6 +34,7 @@ class SessionsController < ApplicationController
       puts "Value: #{value}"
     end
     end
+	 redirect_to timesheets_landing_path
   end
 
   def new
