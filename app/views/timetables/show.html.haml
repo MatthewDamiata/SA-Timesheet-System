@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Start:
+  = @timetable.start
+%p
+  %b End:
+  = @timetable.end
+%p
+  %b User:
+  = @timetable.user_id
+%p
+  %b Notes:
+  = @timetable.notes
+
+= link_to 'Edit', edit_timetable_path(@timetable)
+\|
+= link_to 'Back', timetables_path

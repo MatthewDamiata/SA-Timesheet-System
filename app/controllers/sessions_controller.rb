@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
 				session[:user_id] = auth.user.id 
 				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
         flash[:notice] = message
-      
+        redirect_to timetable_index_path
       else # immediately before your register code
 				
        
