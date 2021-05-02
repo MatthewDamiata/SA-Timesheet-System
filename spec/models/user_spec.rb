@@ -10,7 +10,22 @@ RSpec.describe User, type: :model do
     it 'is a class method' do
 			expect(User).to respond_to(:create_with_omniauth)
     end
-		
+		 context 'a previous user exists' do
+      before(:each) do
+        @user =  User.create!(name: 'SUNY Tester', email: 'stester@binghamton.edu')
+      end 
+      it "can recover the previous user" do
+        expect(User.find_with_auth_hash(OmniAuth.config.mock_auth[:github][:info])).to eq(@user)
+      end
+    end
+    context 'a previous user does not exist' do
+      before(:each) do
+        @user =  User.create!(name: 'Other Tester', email: 'otester@binghamton.edu')
+      end 
+      it "can't recover a previous user that does not exist" do
+          expect(User.find_with_auth_hash(OmniAuth.config.mock_auth[:github][:info])).to eq(nil)
+      end
+    end
     context 'it creates a valid User' do
 			let(:info1) {{'name'=> "SUNY Tester", 'email' => "stester@binghamton.edu"}}
       let(:name) {info1['name']}

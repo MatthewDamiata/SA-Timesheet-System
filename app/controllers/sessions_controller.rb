@@ -48,8 +48,9 @@ class SessionsController < ApplicationController
         
       end
 		@user = User.create_with_omniauth(auth_hash['info'])
-	  #auth = Authorization.create_with_omniauth(auth_hash, @user)
+	  auth = Authorization.create_with_omniauth(auth_hash, @user)
 		auth = Authorization.find_with_auth_hash(auth_hash)
+	  @user = User.find_with_auth_hash(auth_hash['info'])
 		session[:user_id] = auth.user.id
 		self.current_user= auth.user
 		@profile = @user.create_profile
