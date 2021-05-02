@@ -40,8 +40,16 @@ class SessionsController < ApplicationController
 
   def create
     begin
+		  if Authorization.exists?(auth_hash)
+        # indent code
+      
+      else # immediately before your register code
+        # indent code
+        
+      end
 		@user = User.create_with_omniauth(auth_hash['info'])
-	  auth = Authorization.create_with_omniauth(auth_hash, @user)
+	  #auth = Authorization.create_with_omniauth(auth_hash, @user)
+		auth = Authorization.find_with_auth_hash(auth_hash)
 		session[:user_id] = auth.user.id
 		self.current_user= auth.user
 		@profile = @user.create_profile
