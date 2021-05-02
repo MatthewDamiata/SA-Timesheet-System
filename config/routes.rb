@@ -1,25 +1,13 @@
 Rails.application.routes.draw do
   resources :profiles
-  get 'sessions/start_test'
-  
-  get 'sessions/clear'
-  
-  get 'session/debug'
-  
-  get 'sessions/new'
-
-  get 'sessions/create'
-
-  get 'sessions/failure'
-
-  get 'sessions/destroy'
+ 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  get 'timesheets/landing', :as => :timesheets_landing
-  root 'timesheets#landing'
-   post '/auth/:provider/callback', to: 'sessions#create'
+ 
+	resources :timetable
+  post '/auth/:provider/callback', to: 'sessions#create'
 
   match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
   match 'auth/failure', :to => 'sessions#failure', :via => [:get, :post]
@@ -30,6 +18,9 @@ Rails.application.routes.draw do
 	resources :users, only: [:destroy] do
     resources :profiles, only: [:show, :edit, :update, :destroy]
   end
+	
+	get 'timesheets/landing', :as => :timesheets_landing
+  root 'timesheets#landing'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

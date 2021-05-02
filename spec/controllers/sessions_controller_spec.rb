@@ -49,13 +49,11 @@ RSpec.describe SessionsController, type: :controller do
           end
           it 'redirects to the home page' do
 						 post :create, provider: :github
-						 expect(response).to redirect_to(timesheets_landing_path)
+						 expect(response).to redirect_to(timetable_index_path)
           end
-					it 'checks to see that a previous authorization does not exist' do
-						 expect(Authorization).to receive(:exists?).with(OmniAuth.config.mock_auth[:github] ).and_return(false)
-						 post :create, provider: :github
-          end  
+					
         end
+				
       end
 		end
     context "no active session, User and Authorization do not exist" do 
@@ -67,6 +65,12 @@ RSpec.describe SessionsController, type: :controller do
       context 'register with github' do
 			  let(:auth) {double('Authorization', provider: "github", uid: "123456", user_id: id1, user: double('User', name: 'SUNY Tester', email: 'stester@binghamton.edu', id: id1))} 
         describe 'When signing up for first time' do
+					
+					it 'checks to see that a previous authorization does not exist' do
+						 expect(Authorization).to receive(:exists?).with(OmniAuth.config.mock_auth[:github] ).and_return(false)
+						 post :create, provider: :github
+          end  
+					
           it "creates a User" do
 					  expect { post :create, provider: :github }.to change(User, :count).by(1)
           end        

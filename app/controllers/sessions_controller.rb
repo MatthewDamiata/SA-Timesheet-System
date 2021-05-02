@@ -17,6 +17,8 @@ class SessionsController < ApplicationController
   end
 
   def clear
+		session.clear
+		redirect_to timesheets_landing_path
   end
 
   def debug
@@ -37,36 +39,38 @@ class SessionsController < ApplicationController
 	 redirect_to timesheets_landing_path
   end
 
-  def new
-  end
+  
 
   def create
     begin
 		  if Authorization.exists?(auth_hash)
-        # indent code
-# 				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
-#         flash[:notice] = message
+        
+ 			
+				auth = Authorization.find_with_auth_hash(auth_hash)
+				@user = User.find_with_auth_hash(auth_hash['info'])
+				self.current_user= auth.user
+				session[:user_id] = auth.user.id 
+				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
+        flash[:notice] = message
       
       else # immediately before your register code
-        # indent code
-#          message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
-# 				 flash[:notice] = message
-      end
-		@user = User.create_with_omniauth(auth_hash['info'])
-		
-	  auth = Authorization.create_with_omniauth(auth_hash, @user)
-		auth = Authorization.find_with_auth_hash(auth_hash)
-	  @user = User.find_with_auth_hash(auth_hash['info'])
-		session[:user_id] = auth.user.id 
-		
-		self.current_user= auth.user
-		
-		@profile = @user.create_profile
-	  message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
-    flash[:notice] = message
-		
-		redirect_to edit_user_profile_path(@user,@profile) 
-	  #user = User.create!("name" => auth_hash[:info][:name], "email" => auth_hash[:info][:email])
+				
+       
+				@user = User.create_with_omniauth(auth_hash['info'])
+			
+				auth = Authorization.create_with_omniauth(auth_hash, @user)
+				
+			
+				session[:user_id] = auth.user.id 
+
+				self.current_user= auth.user
+				@profile = @user.create_profile
+				message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
+				flash[:notice] = message
+
+				redirect_to edit_user_profile_path(@user,@profile) 
+				#user = User.create!("name" => auth_hash[:info][:name], "email" => auth_hash[:info][:email])
+			end
 		rescue ActiveRecord::RecordInvalid,  Exception => exception
 			flash[:warning] = "#{exception.class}: #{exception.message}" 
       redirect_to timesheets_landing_path and return

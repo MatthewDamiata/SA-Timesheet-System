@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end 
 
 # mutator:  gets set in sessions controller
-def current_user=(user)
-  @current_user = user
-end
+  def current_user=(user)
+		@current_user = user
+	end
 end
