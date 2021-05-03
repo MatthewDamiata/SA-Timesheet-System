@@ -45,15 +45,14 @@ class SessionsController < ApplicationController
 		@action = 'login' # <----- add code
     begin
 		  if Authorization.exists?(auth_hash)
-        p Authorization.all
- 			  p User.all
+        
 				auth = Authorization.find_with_auth_hash(auth_hash)
 				@user = User.find_with_auth_hash(auth_hash['info'])
 				self.current_user= auth.user
 				session[:user_id] = auth.user.id 
 				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
         flash[:notice] = message
-        redirect_to timetable_index_path
+        redirect_to timetables_path
       else # immediately before your register code
 				
        
