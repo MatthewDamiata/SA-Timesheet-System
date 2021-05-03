@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
  
-	resources :timetable
+	resources :timetables
   post '/auth/:provider/callback', to: 'sessions#create'
 
   match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
   match 'auth/failure', :to => 'sessions#failure', :via => [:get, :post]
-  get 'sessions/destroy', :as => 'logout'
+ 
   get 'sessions/clear'
   get 'session/debug'
-
+  match 'sessions/destroy', :as => 'logout', :via => [:get, :post]
 	resources :users, only: [:destroy] do
     resources :profiles, only: [:show, :edit, :update, :destroy]
   end

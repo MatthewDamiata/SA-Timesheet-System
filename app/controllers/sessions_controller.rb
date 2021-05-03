@@ -42,10 +42,11 @@ class SessionsController < ApplicationController
   
 
   def create
+		@action = 'login' # <----- add code
     begin
 		  if Authorization.exists?(auth_hash)
-        
- 			
+        p Authorization.all
+ 			  p User.all
 				auth = Authorization.find_with_auth_hash(auth_hash)
 				@user = User.find_with_auth_hash(auth_hash['info'])
 				self.current_user= auth.user
@@ -83,6 +84,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+		message = "#{self.current_user.name} has logged out."
+    self.current_user = nil
+    session.delete(:user_id)
+    flash[:notice] = message
+    redirect_to timesheets_landing_path
   end
 	
   private 

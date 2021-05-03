@@ -7,7 +7,7 @@ end
 
 
 Then /^I will see "([^"]*)"$/ do |message|
-  #puts page.body # <---
+   puts page.body # <---
   expect(page.body).to have_content(message)
 end
 
@@ -25,4 +25,14 @@ Given /the following users exist/ do |users_table|
     puts 'create user'
     p User.all
   end
+end
+
+
+Given /I am logged into timesheets/ do
+  steps %Q{
+    Given I am on the landing page  
+		And I will see "Hello!"
+    And I press "Register or Login With GitHub"
+    And I am on the timetable page
+    }
 end

@@ -17,14 +17,15 @@ module NavigationHelpers
 #       '/'
 			
 	 when /^the landing page$/
-			'/'
+			timesheets_landing_path
 
 	when /^the Timesheets new Profile page$/
 			sessions_create_path
 	
 	 when /^the Timesheets edit Profile Path for "([^"]*)"$/
       edit_user_profile_path(1, 2)
-     
+   when /^the timetable page$/
+      timetables_path
    when /^press the (.*)$/ then
      find('SAlogo.png').click
 
