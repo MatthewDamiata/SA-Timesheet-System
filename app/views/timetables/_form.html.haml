@@ -1,0 +1,22 @@
+= form_for @timetable do |f|
+  - if @timetable.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@timetable.errors.count, "error")} prohibited this timetable from being saved:"
+      %ul
+        - @timetable.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :start
+    = f.text_field :start
+  .field
+    = f.label :end
+    = f.text_field :end
+  .field
+    = f.label :user_id
+    = f.text_field :user_id
+  .field
+    = f.label :notes
+    = f.text_field :notes
+  .actions
+    = f.submit 'Save'

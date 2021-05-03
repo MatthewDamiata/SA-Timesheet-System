@@ -25,6 +25,7 @@ gem 'jquery-rails'
 #gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'factory_girl_rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -34,7 +35,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'omniauth-rails_csrf_protection'  # protects against recently discovered vulnerability
+gem 'omniauth'                        # flexible, multi-provider authentication library
+gem 'omniauth-github'                 # omniauth strategy for provider github
+gem 'figaro'                          # keeps our secrets safe
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

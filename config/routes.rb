@@ -1,15 +1,27 @@
 Rails.application.routes.draw do
+  resources :profiles
+ 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-	
 
+ 
+	resources :timetables
+  post '/auth/:provider/callback', to: 'sessions#create'
+
+  match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
+  match 'auth/failure', :to => 'sessions#failure', :via => [:get, :post]
+ 
+  get 'sessions/clear'
+  get 'session/debug'
+  match 'sessions/destroy', :as => 'logout', :via => [:get, :post]
+	resources :users, only: [:destroy] do
+    resources :profiles, only: [:show, :edit, :update, :destroy]
+  end
 	
+	get 'timesheets/landing', :as => :timesheets_landing
   root 'timesheets#landing'
-	#login_timesheet 'timesheets#login'
 
-	get 'login', to: 'timesheets#login'
-	get 'register', to: 'timesheets#register'
-	
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

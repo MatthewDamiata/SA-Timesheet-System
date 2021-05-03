@@ -3,15 +3,22 @@ Feature: Login Page
 	I want SA employees to be able to login
 	So that they can access their account
   
-Scenario: User clicks on Login button
-	  When I go to the landing page
-		When I press "Login"
-		Then I should be on the login page  
+Background: authorization and user in database 
+
+  Given the following authorizations exist:
+  | provider|uid    |user_id|
+  | github  |123456 |1      | 
   
-Scenario: User is on login page
-  When I go to the login page
-  Then I should see "Login Here"
-  Then I should see "Email:"
-  Then I should see "Password:"
-  Then I should see "Login"
+  Given the following users exist:
+  |name        | email                 |
+  |Tester Suny | stester@binghamton.edu |
+
+@omniauth_test3 
+Scenario: login
+  Given I am on the landing page
+  And I press "Register or Login With GitHub"
+	#And I am on the timetable page
+  Then I will see "Welcome back Tester Suny! You have logged in via github."
+  And I am on the timetable page
   
+

@@ -27,6 +27,77 @@ require 'cucumber/rails'
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
+require 'cucumber/rails'  # this line will be there already
+require 'omniauth'
+
+Before('@omniauth_test1') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '12345678',
+    :info => {:name => 'Tester Suny', :email => 'tester@binghamton.edu' } })
+    
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test1') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
+Before('@omniauth_test2') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '12345678',
+    :info => {:name => 'Tester Rando', :email => 'tester@rando.com' } })
+      
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test2') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
+Before('@omniauth_test3') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '123456',
+    :info => {:name => 'Tester Suny', :email => 'stester@binghamton.edu' } })
+    
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test3') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
+Before('@omniauth_test4') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '123456',
+    :info => {:name => 'Tester SUNY', :email => 'stester@binghamton.edu' } })
+    
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test4') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.

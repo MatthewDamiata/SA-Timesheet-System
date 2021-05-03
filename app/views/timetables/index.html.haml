@@ -1,0 +1,27 @@
+%h1 Listing timetables
+
+%table
+  %thead
+    %tr
+      %th Start
+      %th End
+      %th User
+      %th Notes
+      %th
+      %th
+      %th
+
+  %tbody
+-#    - @timetables.each do |timetable|
+      %tr
+        %td= timetable.start
+        %td= timetable.end
+        %td= timetable.user_id
+        %td= timetable.notes
+        %td= link_to 'Show', timetable
+        %td= link_to 'Edit', edit_timetable_path(timetable)
+        %td= link_to 'Destroy', timetable, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Timetable', new_timetable_path
