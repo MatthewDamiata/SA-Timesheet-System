@@ -1,27 +1,18 @@
-%h1 Listing timetables
+%h1 Employee Dashboard
 
-%table
+%table{:border => 1, :style => "text-align: center;"}
   %thead
-    %tr
+    %tr{:style => "text-align: center;"}
       %th Start
       %th End
-      %th User
       %th Notes
-      %th
-      %th
-      %th
-
   %tbody
--#    - @timetables.each do |timetable|
-      %tr
-        %td= timetable.start
-        %td= timetable.end
-        %td= timetable.user_id
-        %td= timetable.notes
-        %td= link_to 'Show', timetable
-        %td= link_to 'Edit', edit_timetable_path(timetable)
-        %td= link_to 'Destroy', timetable, method: :delete, data: { confirm: 'Are you sure?' }
-
+    %tr 
+      %th 1:00
+      %th 2:30
+      %th Meeting
 %br
 
-= link_to 'New Timetable', new_timetable_path
+.row
+  = button_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = button_to 'Clock Out', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'

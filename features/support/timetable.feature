@@ -1,7 +1,6 @@
 Feature: Dashboard Page
 	As a developer
-	I want SA employees to be able to clock their hours
-	So that they can record time worked and print out timesheet
+	I want SA employees to see and print their worked hours
 
 Background: timetable seeds
 
@@ -22,18 +21,5 @@ Background: timetable seeds
     And  I press "Clock out"
     Then the table should be popluated with a ending entry with current time
     
-  Scenario: find movie with same director
-    Given I am on the details page for "Star Wars"
-    When  I follow "Find Movies With Same Director"
-    Then  I should be on the Similar Movies page for "Star Wars"
-    And   I should see "THX-1138"
-    But   I should not see "Blade Runner"
-
-  Scenario: can't find similar movies if we don't know director (sad path)
-    Given I am on the details page for "Alien"
-    Then  I should not see "Ridley Scott"
-    When  I follow "Find Movies With Same Director"
-    Then  I should be on the home page
-    And   I should see "'Alien' has no director info"
 	
 	
