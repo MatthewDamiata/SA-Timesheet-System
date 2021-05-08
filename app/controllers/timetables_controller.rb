@@ -1,3 +1,4 @@
+require 'date'
 class TimetablesController < ApplicationController
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
  
@@ -12,7 +13,11 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
-    @timetable = Timetable.new
+   # @timetable = Timetable.new
+	  @clicked = true #true=>if clickd, disable button, false=>enable button
+		@timetable= Timetable.create!(:time_in=>DateTime.now())		
+		flash[:notice] = "You have successfully clocked in!"
+		redirect_to timetables_path
   end
 
   # GET /timetables/1/edit

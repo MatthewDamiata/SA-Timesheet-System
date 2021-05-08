@@ -1,18 +1,28 @@
 %h1 Employee Dashboard
-
-%table{:border => 1, :style => "text-align: center;"}
-  %thead
-    %tr{:style => "text-align: center;"}
-      %th Start
-      %th End
-      %th Notes
-  %tbody
-    %tr 
-      %th 1:00
-      %th 2:30
-      %th Meeting
 %br
+%h2 My Timesheets
+%table#timetables.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Time In
+      %th Time Out
+      %th Notes
+      
+  %tbody
+    - @timetables.each do |timetable|
+      %tr
+        %td
+          = timetable.time_in
+        %td
+          = timetable.time_out
+        %td
+          = timetable.notes
+        %td
+          = link_to "Edit", edit_timetable_path(timetable)
+
 
 .row
-  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  - if @clicked == false
+    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+	
   = link_to 'Clock Out', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'

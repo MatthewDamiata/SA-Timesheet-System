@@ -19,7 +19,7 @@ Background: timetable seeds
   Scenario: user clocks out
     When I go to the timetable page
     And  I press "Clock out"
-    Then the table should be popluated with a ending entry with current time
+    Then I should be on the edit timetable page
     
 	
 	

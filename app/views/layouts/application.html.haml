@@ -8,11 +8,13 @@
     = csrf_meta_tags
     %nav.navbar.navbar-expand-lg.bg-success.text-white.mb-3
       = link_to((image_tag "SAlogo.png"),:id=> "logo" '/')
-      .banner_text Employee Time Sheet
+      .banner_text
+        Employee Time Sheet
+        - unless @action == 'login'
+          = render "layouts/footer"
     .container
       = render 'layouts/flash'
       %main#main
         = yield
-        - unless @action == 'login'
-          = render "layouts/footer"
+      
         
