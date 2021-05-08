@@ -1,7 +1,7 @@
 require 'date'
 class TimetablesController < ApplicationController
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
- 
+	#@clicked =false
   # GET /timetables
   def index
     @timetables = Timetable.all
@@ -13,16 +13,29 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
-   # @timetable = Timetable.new
-	  @clicked = true #true=>if clickd, disable button, false=>enable button
-		@timetable= Timetable.create!(:time_in=>DateTime.now())		
+		
+	  #@clicked = true #true=>if clickd, disable button, false=>enable button
+		@timetable= Timetable.create!(:time_in=>DateTime.now())	
+	
+		@recent = @timetable
 		flash[:notice] = "You have successfully clocked in!"
 		redirect_to timetables_path
   end
 
   # GET /timetables/1/edit
   def edit
+		#@clicked = false 
+	#	@timetable = Timetable.find params[:id]
   end
+	
+# 	def recent_timetable
+#    # @movie = Movie.find params[:id]
+#     @recent = Timetable.find_most_recent
+# #     if @director_movies[:director].blank?
+# #       flash[:warning] = "'#{@movie.title}' has no director info."
+# #       redirect_to movies_path
+# 		redirect_to timetable_edit_path
+#     end
 
   # POST /timetables
   def create

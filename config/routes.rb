@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
  
-	resources :timetables
+	resources :timetables do
+		  member do
+      get "recent_timetable"
+		 end
+	end
   post '/auth/:provider/callback', to: 'sessions#create'
 
   match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]

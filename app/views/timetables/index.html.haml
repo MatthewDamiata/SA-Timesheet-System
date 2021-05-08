@@ -19,10 +19,12 @@
           = timetable.notes
         %td
           = link_to "Edit", edit_timetable_path(timetable)
+			  %td
+          = link_to "Delete", delete_timetable_path(timetable)
+				
 
 
 .row
-  - if @clicked == false
-    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
-	
-  = link_to 'Clock Out', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  - p Timetable.find_most_recent
+  = link_to 'Clock Out',edit_timetable_path(Timetable.find_most_recent),class: 'btn btn-light bg-dark text-light white row_with_padding'
