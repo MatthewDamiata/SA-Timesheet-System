@@ -20,11 +20,12 @@
         %td
           = link_to "Edit", edit_timetable_path(timetable)
         %td
-          = link_to 'Delete', timetable_path(timetable), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-6'
-				
-
+          - if timetable.time_out != nil
+            = link_to 'Delete', timetable_path(timetable), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-6'
+          - else
+            = link_to 'Clock Out', clock_out_timetable_path(timetable),class: 'btn btn-light bg-dark text-light white row_with_padding'
 
 .row
   = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
   - p Timetable.find_most_recent
-  = link_to 'Clock Out',edit_timetable_path(Timetable.find_most_recent),class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = link_to 'Clock Out',class: 'btn btn-light bg-dark text-light white row_with_padding'

@@ -18,7 +18,5 @@
 = link_to 'Back', timetables_path
 
 .row
-  - if @clicked == false
-    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
-	
-  = link_to 'Clock Out', edit_timetable_path(@timetable), class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
+  = link_to 'Clock Out', clock_out_timetable_path(@timetable), class: 'btn btn-light bg-dark text-light white row_with_padding'

@@ -13,7 +13,7 @@ Background: timetable seeds
   
   Scenario:  clocks in
     When I go to the timetable page
-    And  I press "Clock in"
+    And  I press "Clock In"
     Then the table should be popluated with a starting entry with current time
 
   Scenario: clocks out
