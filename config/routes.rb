@@ -8,7 +8,7 @@ Rails.application.routes.draw do
  
 	resources :timetables do
 		  member do
-      get "clock_out"
+				get "clock_out"
 		 end
 	end
   post '/auth/:provider/callback', to: 'sessions#create'
