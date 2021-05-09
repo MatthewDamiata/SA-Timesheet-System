@@ -19,8 +19,8 @@
           = timetable.notes
         %td
           = link_to "Edit", edit_timetable_path(timetable)
-			  %td
-          = link_to "Delete", delete_timetable_path(timetable)
+        %td
+          = link_to 'Delete', timetable_path(timetable), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-6'
 				
 
 
