@@ -11,7 +11,7 @@
       .banner_text
         Employee Time Sheet
         - unless @action == 'login'
-          = render "layouts/footer"
+          = button_to " Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
     .container
       = render 'layouts/flash'
       %main#main

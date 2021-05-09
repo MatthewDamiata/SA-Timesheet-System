@@ -28,6 +28,8 @@ module NavigationHelpers
       timetables_path
    when /^press the (.*)$/ then
      find('SAlogo.png').click
+	 when /^the show timetable page/
+		 timetable_path
 
 
     # Add more mappings here.

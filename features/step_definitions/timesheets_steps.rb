@@ -45,3 +45,6 @@ Then /the table should be popluated with a starting entry with current time/ do
 	current_time.strftime("%Y-%m-%d %h:%M")
 	expect(page.body).to have_content(current_time)
 end
+
+
+

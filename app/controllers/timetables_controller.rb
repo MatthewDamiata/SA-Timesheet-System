@@ -13,6 +13,9 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/1
   def show
+		id = params[:id] # retrieve movie ID from URI route
+    @timetable = Timetable.find(id) # look up movie by unique ID
+    # will render app/views/movies/show.<extension> by default
   end
 
   # GET /timetables/new
@@ -49,7 +52,7 @@ class TimetablesController < ApplicationController
   # PATCH/PUT /timetables/1
   def update
     if @timetable.update(timetable_params)
-      redirect_to @timetable, notice: 'Timetable was successfully updated.'
+      redirect_to timetables_path, notice: 'Timetable was successfully updated.'
     else
       render :edit
     end

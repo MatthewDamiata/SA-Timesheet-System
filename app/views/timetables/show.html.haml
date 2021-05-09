@@ -7,16 +7,9 @@
   %b End:
   = @timetable.time_out
 %p
-  %b User:
-  = @timetable.user_id
-%p
   %b Notes:
   = @timetable.notes
 
-= link_to 'Edit', edit_timetable_path(@timetable)
-\|
-= link_to 'Back', timetables_path
-
 .row
-  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
-  = link_to 'Clock Out', clock_out_timetable_path(@timetable), class: 'btn btn-light bg-dark text-light white row_with_padding'
+= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
+= link_to 'Clock Out', clock_out_timetable_path(@timetable), class: 'btn btn-light bg-dark text-light white'
