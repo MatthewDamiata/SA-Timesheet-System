@@ -6,11 +6,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
  
-	resources :timetables do
-		  member do
-				get "clock_out"
-		 end
-	end
+
   post '/auth/:provider/callback', to: 'sessions#create'
 
   match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
@@ -23,6 +19,11 @@ Rails.application.routes.draw do
     resources :profiles, only: [:show, :edit, :update, :destroy]
   end
 	
+	resources :timetables do
+		  member do
+				get "clock_out"
+		 end
+	end
 	get 'timesheets/landing', :as => :timesheets_landing
   root 'timesheets#landing'
 

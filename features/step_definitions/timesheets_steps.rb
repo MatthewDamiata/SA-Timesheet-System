@@ -15,6 +15,8 @@ Then /^I will see "([^"]*)"$/ do |message|
   expect(page.body).to have_content(message)
 end
 
+
+
 Given /the following authorizations exist/ do |authorizations_table|
   authorizations_table.hashes.each do |authorization|
     Authorization.create! authorization
@@ -40,7 +42,6 @@ Given /I am logged into timesheets/ do
 end
 
 Then /the table should be popluated with a starting entry with current time/ do
-
 	current_time = DateTime.now()
 	current_time.strftime("%Y-%m-%d %h:%M")
 	expect(page.body).to have_content(current_time)

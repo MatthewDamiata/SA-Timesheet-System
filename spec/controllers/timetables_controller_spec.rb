@@ -32,10 +32,23 @@ RSpec.describe TimetablesController, type: :controller do
           #@movie = Movie.find params[:id]
           allow(Timetable).to receive(:find).with(id1).and_return(timetable1)
         end
-				it "updates the time to the current time" do
+				it "calls update method" do
+					allow(timetable1).to receive(:update)
 					get :clock_out, id: id1
-					expect(timetable1.time_out).to eq(DateTime.now())
 				end
+				it "updates the time out " do
+				
+					allow(timetable1).to receive(:update).and_return(time_out: DateTime.now())
+					get :clock_out, id: id1
+		    end
+				it "redirects to the edit page" do
+				  allow(timetable1).to receive(:update).and_return(time_out: DateTime.now())
+					get :clock_out, id: id1
+				  expect(response).to redirect_to edit_timetable_path(timetable1)
+					
+				end
+				
+		
 	   end
 end
 end
