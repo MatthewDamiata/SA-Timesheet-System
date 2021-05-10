@@ -28,8 +28,10 @@ module NavigationHelpers
       timetables_path
    when /^press the (.*)$/ then
      find('SAlogo.png').click
-	 when /^the show timetable page/
-		 timetable_path
+	 when /^the edit timetable page for "([^"]+)"$/
+      edit_timetable_path(Timetable.find_by_time_in($1))
+	 when /^the show timetable page for "([^"]+)"$/
+			timetable_path(Timetable.find_by_time_in($1))
 	 
 
 
