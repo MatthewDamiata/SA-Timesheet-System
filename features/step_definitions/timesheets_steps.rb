@@ -11,6 +11,7 @@ Given /the following timetables exist/ do |timetables_table|
     Timetable.create timetable
   end
 end
+
 Then /^I will see "([^"]*)"$/ do |message|
   expect(page.body).to have_content(message)
 end

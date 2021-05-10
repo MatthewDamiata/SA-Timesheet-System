@@ -26,11 +26,13 @@ require 'rails_helper'
 RSpec.describe TimetablesController, type: :controller do
 	 describe "#clock_out" do
 		 context "user clocks out" do
-			  let(:id1) {'1'}
+			  
+				let(:id1) {'1'}
         let(:timetable1) {instance_double("Timetable", time_in: "2021-04-20 05:20:48", time_out: nil, notes:"", user_id:"1")}
         before(:each) do
-          #@movie = Movie.find params[:id]
           allow(Timetable).to receive(:find).with(id1).and_return(timetable1)
+				user =  User.create!(name: 'SUNY Tester', email: 'stester@binghamton.edu')
+        @auth = Authorization.create!(provider: "github", uid: "123456", user_id: user.id) 
         end
 				it "calls update method" do
 					allow(timetable1).to receive(:update)
