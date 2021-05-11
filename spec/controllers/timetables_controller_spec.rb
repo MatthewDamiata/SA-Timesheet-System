@@ -31,10 +31,8 @@ RSpec.describe TimetablesController, type: :controller do
         let(:timetable1) {instance_double("Timetable", time_in: "2021-04-20 05:20:48", time_out: nil, notes:"", user_id:"1")}
         
 			 before(:each) do
-          allow(Timetable).to receive(:find).with(id1).and_return(timetable1)
-				
+          allow(Timetable).to receive(:find).with(id1).and_return(timetable1)	
         end
-			 
 		 
 				it "calls update method" do
 					allow(timetable1).to receive(:update)

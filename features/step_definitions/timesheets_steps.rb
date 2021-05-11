@@ -49,7 +49,7 @@ Given /the current time is "([^"]*)"$/ do |date|
   
 end
 
-Then /the table should be popluated with a starting entry with current time/ do
+Then /the table should be popluated with a starting entry with current time/ do 
 	current_time = DateTime.now()
 	current_time.strftime("%Y-%m-%d %h:%M")
 	expect(page.body).to have_content(current_time)

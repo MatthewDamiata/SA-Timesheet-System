@@ -22,7 +22,7 @@ Scenario: User edits timesheets
 	Given I am logged into timesheets
 	When I go to the timetable page
 	When I follow "Edit"
-	Then I should be on the edit timetable page for "2021-04-20 05:20:48"
+	Then I should be on the edit timetable page for "big job"
   When I fill in "Notes" with "Did my work"
 	And I press "Save"
 	Then I should be on the timetable page
