@@ -14,23 +14,18 @@ Background: timetable seeds
 
 
   Given the following timetables exist:
-  | time_in                  | time_out             | notes        | user_id
-  | 2021-05-11 13:15:11 UTC  |                      | big job      |  1
+ |id | time_in                  | time_out             | notes        | user_id|
+ |1  | 2021-05-11 13:15:11      |                      |       |  1      |
    
 @omniauth_test6
-Scenario: clocks out on dashboard
+Scenario: Clock Out
 	Given I am logged into timesheets
   When I go to the timetable page
   And  I follow "Clock Out"
-  Then I should be on the edit timetable page for "big job"
+  Then I should be on the edit timetable page for "1"
+	Then I should see "Back to Dashboard"
 
-@omniauth_test7
-Scenario: clocks out on show page
-  Given I am logged into timesheets
-  When I am on the show timetable page for "2021-05-11 13:15:11 UTC"
-  And  I follow "Clock Out"
-	Then I should be on the edit timetable page for "big job"
-	
+
 
 
     

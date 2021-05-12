@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
  
 
-  post '/auth/:provider/callback', to: 'sessions#create'
+ 
 
   match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
   match 'auth/failure', :to => 'sessions#failure', :via => [:get, :post]
@@ -20,9 +20,7 @@ Rails.application.routes.draw do
   end
 	
 	resources :timetables do
-		  member do
-				get "clock_out"
-		 end
+
 	end
 	get 'timesheets/landing', :as => :timesheets_landing
   root 'timesheets#landing'

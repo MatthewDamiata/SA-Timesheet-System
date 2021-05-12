@@ -5,10 +5,6 @@ class TimetablesController < ApplicationController
   # GET /timetables
   def index
     @timetables = Timetable.all
-	
-	 
-
-		
   end
 
   # GET /timetables/1
@@ -20,17 +16,29 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
-		
+	@timetable= Timetable.create!(time_in: DateTime.now())
+
 	  #@clicked = true #true=>if clickd, disable button, false=>enable button
-		@timetable= Timetable.create!(:time_in=>DateTime.now())	
+# 		@timetable= Timetable.create!(:time_in=>DateTime.now())	
 	
-		flash[:notice] = "You have successfully clocked in!"
-		redirect_to timetable_path(@timetable)
+    flash[:notice] = "You have successfully clocked in!"
+		redirect_to timetables_path
   end
 
   # GET /timetables/1/edit
   def edit
+		@timetable = Timetable.find(params[:id])
+		if @timetable.time_out==nil
+			@timetable.update(time_out: DateTime.now()) 
+		end
 	end
+	
+	
+	
+	
+	
+	
+	
 	
 	def clock_out
 		@timetable = Timetable.find(params[:id])
@@ -41,20 +49,17 @@ class TimetablesController < ApplicationController
 	
   def create
     @timetable = Timetable.new(timetable_params)
-
     if @timetable.save
       redirect_to @timetable, notice: 'Timetable was successfully created.'
     else
-      render :new
-    end
+       render :new
+		end
   end
 
   # PATCH/PUT /timetables/1
   def update
     if @timetable.update(timetable_params)
       redirect_to timetables_path, notice: 'Timetable was successfully updated.'
-    else
-      render :edit
     end
   end
 
@@ -72,6 +77,6 @@ class TimetablesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def timetable_params
-      params.require(:timetable).permit(:time_in, :time_out, :notes, :user_id )
+      params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id )
     end
 end

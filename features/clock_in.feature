@@ -23,11 +23,10 @@ Background: timetable seeds
 
 @omniauth_test5
 Scenario: user clocks in
-  Given I am logged into timesheets'
-	Given the current time is "2021-02-20 05:10:48"
+  Given I am logged into timesheets
   When I go to the timetable page
   And  I follow "Clock In"
-	Then I should be on the show timetable page for "2021-02-20 05:10:48"
+	Then I should see "Clock Out"
 	
 
 

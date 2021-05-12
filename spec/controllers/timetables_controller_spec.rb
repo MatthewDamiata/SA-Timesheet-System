@@ -24,32 +24,5 @@ require 'rails_helper'
 # # `rails-controller-testing` gem.
 
 RSpec.describe TimetablesController, type: :controller do
-	 describe "#clock_out" do
-		 context "user clocks out" do
-			  
-				let(:id1) {'1'}
-        let(:timetable1) {instance_double("Timetable", time_in: "2021-04-20 05:20:48", time_out: nil, notes:"", user_id:"1")}
-        
-			 before(:each) do
-          allow(Timetable).to receive(:find).with(id1).and_return(timetable1)	
-        end
-		 
-				it "calls update method" do
-					allow(timetable1).to receive(:update)
-					get :clock_out, id: id1
-				end
-		 
-				it "updates the time out " do
-					allow(timetable1).to receive(:update).and_return(time_out: DateTime.now())
-					get :clock_out, id: id1
-		    end
-		 
-				it "redirects to the edit page" do
-				  allow(timetable1).to receive(:update).and_return(time_out: DateTime.now())
-					get :clock_out, id: id1
-				  expect(response).to redirect_to edit_timetable_path(timetable1)
-				end
-		 
-	   end
-end
+	 
 end
