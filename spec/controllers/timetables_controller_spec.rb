@@ -62,21 +62,23 @@ RSpec.describe TimetablesController, type: :controller do
 	
 	 describe "edit" do
 		  let(:id1) {'1'}
-      let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "")}
+      let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "2021-04-20 05:20:48")}
 		 
 		  let(:id2) {'2'}
       let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil)}
 		 
 		  before(:each) do
-#         allow(Timetable).to receive(:find).with(id1).and_return(time1)
-# 				allow(Timetable).to receive(:find).with(id2).and_return(time2)
-				@time1 = Timetable.create(time_in: "2021-04-20 06:20:48", time_out: nil)
+        allow(Timetable).to receive(:find).with(id1).and_return(time1)
+				allow(Timetable).to receive(:find).with(id2).and_return(time2)
+				#@time1 = Timetable.create(time_in: "2021-04-20 06:20:48", time_out: nil)
       end
 		 
 			it "renders the edit template" do
 				get :edit, :id=>id1
         expect(response).to render_template(:edit)		
 			end	
+		 
+	 
 # 		 it "set the time out" do
 # 			 get :edit, :id=>id2
 # 			 expect(assigns[:time1]).to receive(:update)
@@ -121,10 +123,9 @@ RSpec.describe TimetablesController, type: :controller do
 			expect(Timetable.find_by_notes("Updated!")).to eq(@time1)
 		end
 		
-		it "updates when its nil" do 
+		it "updates when time out is nil" do 
 			@time2.update(time_out:DateTime.now())
 			expect(@time2.time_out).not_to eq(nil)
-			
 		end
 		
 	end
