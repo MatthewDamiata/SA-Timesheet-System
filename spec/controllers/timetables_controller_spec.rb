@@ -65,7 +65,7 @@ RSpec.describe TimetablesController, type: :controller do
       let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "2021-04-20 05:20:48")}
 		 
 		  let(:id2) {'2'}
-      let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil)}
+      let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil, notes:"", user_id:"1")}
 		 
 		  before(:each) do
         allow(Timetable).to receive(:find).with(id1).and_return(time1)
@@ -79,11 +79,17 @@ RSpec.describe TimetablesController, type: :controller do
 			end	
 		 
 	 
-# 		 it "set the time out" do
-# 			 get :edit, :id=>id2
-# 			 expect(assigns[:time1]).to receive(:update)
-# 			 #expect(assigns[:timetable].time_out).not_to eq(nil)
-# 		 end
+		 it "updates the time out when timeout is nil" do
+			 allow(time2).to receive(:update). and_return(time_out:DateTime.now())
+			 get :edit, :id=>id2
+		 end
+		 
+		 it "does not update the time out when timeout is not nil" do
+			 expect(time1).not_to receive(:update)
+			 get :edit, :id=>id1
+			
+			
+		 end
 		 
 	end
 	describe "create" do
