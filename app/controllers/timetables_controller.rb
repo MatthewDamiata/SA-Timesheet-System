@@ -34,19 +34,7 @@ class TimetablesController < ApplicationController
 	end
 	
 	
-	
-	
-	
-	
-	
-	
-	def clock_out
-		@timetable = Timetable.find(params[:id])
-		@timetable.update(time_out: DateTime.now())
-		redirect_to edit_timetable_path(@timetable)
-		
-	end
-	
+
   def create
     @timetable = Timetable.new(timetable_params)
     if @timetable.save
@@ -66,7 +54,8 @@ class TimetablesController < ApplicationController
   # DELETE /timetables/1
   def destroy
     @timetable.destroy
-    redirect_to timetables_url, notice: 'Timetable was successfully destroyed.'
+		flash[:notice]= 'Timetable was successfully destroyed.'
+    redirect_to timetables_url
   end
 
   private

@@ -24,5 +24,110 @@ require 'rails_helper'
 # # `rails-controller-testing` gem.
 
 RSpec.describe TimetablesController, type: :controller do
-	 
+	
+	 describe "index" do 
+		
+     it "gathers all the timeables" do
+			 get :index
+			 expect(assigns[:timetables]).to eq(Timetable.all)
+		 end
+	
+		it "renders the index template" do
+      get :index
+      expect(response).to render_template(:index)
+    end
+	 end
+
+	
+	 describe "new" do
+		 it "assigns a timetable model" do
+			  get :new
+			  expect(assigns[:timetable]).to be_instance_of(Timetable)
+		 end
+		 
+		 it "sets the the time in" do
+			 get :new
+			 expect(assigns[:timetable].time_in).not_to eq(nil)
+		 end
+		 it "sets the flash message" do
+			 get :new
+			 expect(flash[:notice]).to eq("You have successfully clocked in!")
+		 end
+		 it "redirects back to the dashboard" do
+			 get :new
+			 expect(response).to redirect_to(timetables_path)
+	   end
+		 
+	 end
+	
+	 describe "edit" do
+		  let(:id1) {'1'}
+      let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "")}
+		 
+		  let(:id2) {'2'}
+      let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil)}
+		 
+		  before(:each) do
+#         allow(Timetable).to receive(:find).with(id1).and_return(time1)
+# 				allow(Timetable).to receive(:find).with(id2).and_return(time2)
+				@time1 = Timetable.create(time_in: "2021-04-20 06:20:48", time_out: nil)
+      end
+		 
+			it "renders the edit template" do
+				get :edit, :id=>id1
+        expect(response).to render_template(:edit)		
+			end	
+# 		 it "set the time out" do
+# 			 get :edit, :id=>id2
+# 			 expect(assigns[:time1]).to receive(:update)
+# 			 #expect(assigns[:timetable].time_out).not_to eq(nil)
+# 		 end
+		 
+	end
+	describe "create" do
+		  context "with valid params" do
+      it "creates a new Timetable" do
+        expect {
+          post :create, {:timetable => {time_in: ""}}
+        }.to change(Timetable, :count).by(1)
+      end
+
+  
+    end
+
+	end
+	
+	describe "destroy" do
+		let(:id1) {'1'}
+    let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "", notes: "N/A")}
+		 before(:each) do
+       @time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"")
+      end
+		
+	  it "Deletes a timetable" do
+		 @time1.destroy
+     expect(Timetable.find_by(notes: "N/A")).to be_nil
+	  end
+	
+	end
+	
+	describe "update" do
+		before(:all) do
+			@time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"")
+			@time2 = Timetable.create(time_in:"",time_out:nil ,notes:"",user_id:"")
+		end
+		it "updates the timetable notes" do
+			@time1.update(notes:"Updated!")
+			expect(Timetable.find_by_notes("Updated!")).to eq(@time1)
+		end
+		
+		it "updates when its nil" do 
+			@time2.update(time_out:DateTime.now())
+			expect(@time2.time_out).not_to eq(nil)
+			
+		end
+		
+	end
+	
+	
 end
