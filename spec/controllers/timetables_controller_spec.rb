@@ -24,7 +24,12 @@ require 'rails_helper'
 # # `rails-controller-testing` gem.
 
 RSpec.describe TimetablesController, type: :controller do
-	
+   before(:each) do  
+     @user = User.create!(name: 'SUNY Tester', email: 'stester@binghamton.edu')
+     @auth = Authorization.create!(provider: "github", uid: "123456", user_id: @user.id)
+     session[:user_id] = @user.id
+     @current_user = @user
+   end 
 	 describe "index" do 
 		
      it "gathers all the timeables" do

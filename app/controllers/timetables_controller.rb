@@ -18,7 +18,7 @@ class TimetablesController < ApplicationController
   def new
 	@timetable= Timetable.create!(time_in: DateTime.now())
 
-	  #@clicked = true #true=>if clickd, disable button, false=>enable button
+	  #@clicked = true #true=>if clicked, disable button, false=>enable button
 # 		@timetable= Timetable.create!(:time_in=>DateTime.now())	
 	
     flash[:notice] = "You have successfully clocked in!"
@@ -32,8 +32,6 @@ class TimetablesController < ApplicationController
 			@timetable.update(time_out: DateTime.now()) 
 		end
 	end
-	
-	
 
   def create
     @timetable = Timetable.new(timetable_params)
