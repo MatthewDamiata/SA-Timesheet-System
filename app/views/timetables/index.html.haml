@@ -1,10 +1,19 @@
-%h1 Employee Dashboard
-%br
-%br
-%h2 My Timesheet
+%h1
+  = "#{current_user.name}'s Timesheet"
+
 .row
-  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding'
- 
+  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding' 
+  
+%h6 Date Selector
+= label_tag :timetable_from_date, "From: "
+= date_select "timetable", "fromdate"
+= label_tag :timetable_to_date, "To: "
+= date_select "timetable", "todate"
+= submit_tag "Update"
+%br
+= link_to 'Print Timesheet', 'print', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
+%br
+%br
 %table#timetables.table.table-striped.col-md-12
   %thead
     %tr
@@ -24,10 +33,23 @@
         %td
           = timetable.notes
         %td
-          = link_to "Edit", edit_timetable_path(timetable), class: 'btn btn-primary text-light white'
+          - if timetable.time_out != nil
+            = link_to "Edit", edit_timetable_path(timetable), class: 'btn btn-primary text-light white'
         %td
           - if timetable.time_out != nil
             = link_to 'Delete', timetable_path(timetable), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
           - else
             = link_to 'Clock Out', edit_timetable_path(timetable),class: 'btn btn-light bg-dark text-light white'
 
+%table#timetables.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Total Days
+      %th Total Hours   
+      
+  %tbody
+    %tr
+      %td
+        = @total_days
+      %td
+        = @total_hours

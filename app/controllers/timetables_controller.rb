@@ -1,25 +1,35 @@
 require 'date'
 class TimetablesController < ApplicationController
 	 before_action :set_timetable, only: [:show, :edit, :update, :destroy]
-	#@clicked =false
+
   # GET /timetables
   def index
-    @timetables = Timetable.all
+    myid = current_user.id
+    @timetables = Timetable.where(:user_id => myid)
+    @total_days = @timetables.size
+    @total_hours = 0
+    temp = 0
+    @timetables.each do |x| 
+      if x.time_out != nil and x.time_in != nil
+        temp = (x.time_out.to_time - x.time_in.to_time)
+        @total_hours += (temp / 3600)
+      end
+    end
+    @total_hours = @total_hours.round(2)
   end
 
   # GET /timetables/1
   def show
 		id = params[:id] # retrieve movie ID from URI route
     @timetable = Timetable.find(id) # look up movie by unique ID
-    # will render app/views/movies/show.<extension> by default
   end
 
   # GET /timetables/new
   def new
-	@timetable= Timetable.create!(time_in: DateTime.now())
+	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
-# 		@timetable= Timetable.create!(:time_in=>DateTime.now())	
+    #@timetable= Timetable.create!(:time_in=>DateTime.now())	
 	
     flash[:notice] = "You have successfully clocked in!"
 		redirect_to timetables_path
@@ -28,7 +38,7 @@ class TimetablesController < ApplicationController
   # GET /timetables/1/edit
   def edit
 		@timetable = Timetable.find(params[:id])
-		if @timetable.time_out==nil
+		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now()) 
 		end
 	end
