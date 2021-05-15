@@ -49,7 +49,7 @@ RSpec.describe SessionsController, type: :controller do
           end
           it 'redirects to the home page' do
 						 post :create, provider: :github
-						 expect(response).to redirect_to(timetable_index_path)
+						 expect(response).to redirect_to(timetables_path)
           end
 					
         end

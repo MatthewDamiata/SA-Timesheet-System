@@ -15,9 +15,10 @@
  */
 
 .banner_text{
-    position: absolute; /*or fixed*/
-    right: 20px;
-    font-size: 25px;
+  position: absolute;
+	right: 25px;
+	font-size: 20px;
+
 }
 
 .landing_text{

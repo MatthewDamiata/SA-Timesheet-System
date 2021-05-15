@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+ class User < ActiveRecord::Base
 	has_many :authorizations, :dependent => :destroy
 	has_one :profile, :dependent => :destroy
   validates :name, :email, :presence => true

@@ -2,17 +2,14 @@
 
 %p
   %b Start:
-  = @timetable.start
+  = @timetable.time_in
 %p
   %b End:
-  = @timetable.end
-%p
-  %b User:
-  = @timetable.user_id
+  = @timetable.time_out
 %p
   %b Notes:
   = @timetable.notes
 
-= link_to 'Edit', edit_timetable_path(@timetable)
-\|
-= link_to 'Back', timetables_path
+.row
+= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
+
