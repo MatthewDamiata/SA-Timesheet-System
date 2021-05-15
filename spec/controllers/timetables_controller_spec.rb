@@ -32,9 +32,9 @@ RSpec.describe TimetablesController, type: :controller do
    end 
 	 describe "index" do 
 		
-     it "gathers all the timeables" do
+     it "gathers all the timeables fromt the current user" do
 			 get :index
-			 expect(assigns[:timetables]).to eq(Timetable.all)
+			 expect(assigns[:timetables]).to eq(Timetable.where(:user_id => @user.id))
 		 end
 	
 		it "renders the index template" do

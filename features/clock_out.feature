@@ -24,6 +24,7 @@ Scenario: Clock Out
   And  I follow "Clock Out"
   Then I should be on the edit timetable page for "1"
 	Then I should see "Back to Dashboard"
+	
 
 
 

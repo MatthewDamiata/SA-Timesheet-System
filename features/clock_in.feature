@@ -27,6 +27,7 @@ Scenario: user clocks in
   When I go to the timetable page
   And  I follow "Clock In"
 	Then I should see "Clock Out"
+	But I should not see "Clock In"
 	
 
 
