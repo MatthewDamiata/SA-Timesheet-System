@@ -9,7 +9,11 @@ class TimetablesController < ApplicationController
     @total_days = @timetables.size
     @total_hours = 0
     temp = 0
+    @found_clocked = 0
     @timetables.each do |x| 
+      if x.time_out == nil
+        @found_clocked = 1
+      end
       if x.time_out != nil and x.time_in != nil
         temp = (x.time_out.to_time - x.time_in.to_time)
         @total_hours += (temp / 3600)
@@ -26,6 +30,7 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
+    @clocked_in = 1
 	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
@@ -39,7 +44,8 @@ class TimetablesController < ApplicationController
   def edit
 		@timetable = Timetable.find(params[:id])
 		if @timetable.time_out == nil
-			@timetable.update(time_out: DateTime.now()) 
+			@timetable.update(time_out: DateTime.now())
+      @clocked_in = 0
 		end
 	end
 
