@@ -48,7 +48,10 @@ Given /the current time is "([^"]*)"$/ do |date|
 	
   
 end
-
+Given /I filter the dates from "([^"]*)" to "([^"]*)"/ do |start_time, end_time|
+	 DateTime.strptime(start_time,"%m/%d/%Y")
+   DateTime.strptime(end_time,"%m/%d/%Y") 
+end
 Then /the current time/ do 
 	current_time = DateTime.now()
 	current_time.strftime("%Y-%m-%d %h:%M")
