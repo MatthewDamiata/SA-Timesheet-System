@@ -14,15 +14,15 @@ Background: timetable seeds
   |Tester Suny | stester@binghamton.edu |
   
   Given the following timetables exist:
-  |id| time_in              | time_out             | notes       |
-  |1 | 2021-04-20 05:20:48  | 2021-04-20 05:40:48  | big job     |
+  |id| time_in              | time_out             | notes       |user_id|
+  |62| 2021-04-20 05:20:48  | 2021-04-20 05:40:48  | big job     |1      |
 
 @omniauth_test8
 Scenario: User edits timesheets
 	Given I am logged into timesheets
 	When I go to the timetable page
 	When I follow "Edit"
-	Then I should be on the edit timetable page for "1"
+	Then I should be on the edit timetable page for "62"
   When I fill in "Notes" with "Did my work"
 	And I press "Save"
 	Then I should be on the timetable page
@@ -34,7 +34,7 @@ Scenario: User goes back to dashboard
 	Given I am logged into timesheets
 	When I go to the timetable page
 	When I follow "Edit"
-	Then I should be on the edit timetable page for "1"
+	Then I should be on the edit timetable page for "62"
   When I fill in "Notes" with "Did my work"
 	And I follow "Back to Dashboard"
 	Then I should be on the timetable page
