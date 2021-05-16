@@ -1,9 +1,5 @@
 class Timetable < ActiveRecord::Base
-	def self.find_most_recent
-		Timetable.last
-	end
-	
-	def out
-# 		@timetable.time_out = DateTime.now()
+	def self.filter_dates(start_date,end_date)
+   Timetable.where("time_out >= start_date_date AND time_out <= end_date")
 	end
 end
