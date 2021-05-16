@@ -13,7 +13,8 @@
         - unless @action == 'login'
           = button_to " Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
     .container
-      = render 'layouts/flash'
+      .flash
+        = render 'layouts/flash'
       %main#main
         = yield
       

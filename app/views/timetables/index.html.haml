@@ -1,35 +1,43 @@
-%h1
+%h1#name
   = "#{current_user.name}'s Timesheet"
+%br
+.printer
+  %h6 Date Selector
+  = label_tag :timetable_from_date, "From: "
+  = date_select "timetable", "fromdate"
+  = label_tag :timetable_to_date, "To: "
+  = date_select "timetable", "todate"
+  = submit_tag "Update"
 
-.row
-  = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-dark text-light white row_with_padding' 
-  
-%h6 Date Selector
-= label_tag :timetable_from_date, "From: "
-= date_select "timetable", "fromdate"
-= label_tag :timetable_to_date, "To: "
-= date_select "timetable", "todate"
-= submit_tag "Update"
+.printer
+  = link_to 'Print Timesheet', 'print', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
+
 %br
-= link_to 'Print Timesheet', 'print', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
-%br
-%br
+.clockinbutton
+  - if @found_clocked == 0
+    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
+    
 %table#timetables.table.table-striped.col-md-12
   %thead
     %tr
       %th Time In
       %th Time Out
+      %th Hours
       %th Notes
-      %th Edit
-      %th Operation
+      %th
+      %th
       
   %tbody
     - @timetables.each do |timetable|
       %tr
         %td
-          = timetable.time_in
+          = timetable.time_in.strftime("%m/%d/%Y - %l:%M %p")
         %td
-          = timetable.time_out
+          - if timetable.time_out != nil
+            = timetable.time_out.strftime("%m/%d/%Y - %l:%M %p")
+        %td
+          - if timetable.time_out != nil
+            = ((timetable.time_out.to_time - timetable.time_in.to_time) / 3600).round(2)
         %td
           = timetable.notes
         %td
@@ -41,7 +49,7 @@
           - else
             = link_to 'Clock Out', edit_timetable_path(timetable),class: 'btn btn-light bg-dark text-light white'
 
-%table#timetables.table.table-striped.col-md-12
+%table#timetables.table.table-striped.col-md-12.some{:style => "text-align: right;"}
   %thead
     %tr
       %th Total Shifts
@@ -53,3 +61,10 @@
         = @total_days
       %td
         = @total_hours
+        
+.signatures
+  %h4
+    Employee Signature:____________________________________________  Date:_______________________
+    %br
+    %br
+    Manager Signature:_____________________________________________  Date:_______________________

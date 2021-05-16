@@ -1,0 +1,11 @@
+@media print {
+  div.row, div.printer, div.flash, div.clockinbutton{
+    display: none;
+  }
+}
+
+@media screen {
+   .signatures {
+       display: none;
+   }
+}
