@@ -220,7 +220,10 @@ After('@omniauth_test11') do
   OmniAuth.config.test_mode = false
   OmniAuth.config.mock_auth[:github] = nil
 end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1dcea9607d7f7f20c6ac10f182a778ce4429879d
 
 Before('@omniauth_test12') do
   OmniAuth.config.test_mode = true
