@@ -1,11 +1,25 @@
 require 'date'
 class TimetablesController < ApplicationController
-	 before_action :set_timetable, only: [:show, :edit, :update, :destroy]
-
+	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
+  
   # GET /timetables
   def index
     myid = current_user.id
-    @timetables = Timetable.where(:user_id => myid)
+    if params[:timetable] != nil
+      fromyear = params[:timetable]["fromdate(1i)"]
+      toyear = params[:timetable]["todate(1i)"]
+      frommonth = params[:timetable]["fromdate(2i)"]
+      tomonth = params[:timetable]["todate(2i)"]
+      fromday = params[:timetable]["fromdate(3i)"]
+      today = params[:timetable]["todate(3i)"]
+      final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
+      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i) 
+      @timetables = Timetable.where({:user_id => myid, time_in: final_from_date..(final_to_date + 1.day) })
+      @fromdate = final_from_date
+      @todate  = final_to_date
+    else
+      @timetables = Timetable.where({:user_id => myid})
+    end
     @total_days = @timetables.size
     @total_hours = 0
     temp = 0
