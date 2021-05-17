@@ -43,8 +43,8 @@ RSpec.describe SessionsController, type: :controller do
           it 'sets a flash message' do
 						  
 						 post :create, provider: :github
-				#		 message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
-       # flash[:notice] = message
+				     #message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
+             #flash[:notice] = message
 						 expect(flash[:notice]).to match(/^Welcome back #{user1.name}! You have logged in via #{auth1.provider}.$/) 
           end
           it 'redirects to the home page' do
