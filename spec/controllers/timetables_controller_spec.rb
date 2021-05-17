@@ -48,7 +48,6 @@ RSpec.describe TimetablesController, type: :controller do
 		 
 		 it "shows the amount of shifts" do
 			 get :index
-			 p assigns[:total_days]
 			 expect(assigns[:total_days]).to eq(Timetable.where(:user_id => @user.id).size)
 		 end
 		 

@@ -1,8 +1,12 @@
 require 'date'
 class TimetablesController < ApplicationController
 	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
+ 
+  def print
+    flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
+    p "sup"
+  end
   
-  # GET /timetables
   def index
     myid = current_user.id
     if params[:timetable] != nil
@@ -31,7 +35,6 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
-    ENV['TZ'] = 'America/New_York'
     @clocked_in = 1
 		
 	  @timetable= Timetable.create!(time_in: DateTime.now() - 4.hour, user_id: current_user.id)
@@ -101,6 +104,7 @@ class TimetablesController < ApplicationController
     def timetable_params
       params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id )
     end
+  
 	  def sort_by_date
 		  myid = current_user.id
 			fromyear = params[:timetable]["fromdate(1i)"]
@@ -115,4 +119,5 @@ class TimetablesController < ApplicationController
       @fromdate = final_from_date
       @todate  = final_to_date
 		end
+  
 end

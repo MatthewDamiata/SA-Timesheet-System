@@ -255,6 +255,41 @@ After('@omniauth_test13') do
   OmniAuth.config.test_mode = false
   OmniAuth.config.mock_auth[:github] = nil
 end
+
+Before('@omniauth_test14') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '123456',
+    :info => {:name => 'Tester SUNY', :email => 'stester@binghamton.edu' } })
+    
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test14') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
+Before('@omniauth_test15') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    :provider => 'github',
+    :uid => '123456',
+    :info => {:name => 'Tester SUNY', :email => 'stester@binghamton.edu' } })
+    
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]  
+end
+
+After('@omniauth_test15') do
+  OmniAuth.config.test_mode = false
+  OmniAuth.config.mock_auth[:github] = nil
+end
+
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
