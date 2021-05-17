@@ -5,7 +5,6 @@ class TimetablesController < ApplicationController
   # GET /timetables
   def index
     myid = current_user.id
-    myid = current_user.id
     if params[:timetable] != nil
       fromyear = params[:timetable]["fromdate(1i)"]
       toyear = params[:timetable]["todate(1i)"]
@@ -32,9 +31,10 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
+    ENV['TZ'] = 'America/New_York'
     @clocked_in = 1
 		
-	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
+	  @timetable= Timetable.create!(time_in: DateTime.now() - 4.hour, user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
     #@timetable= Timetable.create!(:time_in=>DateTime.now())	
@@ -47,7 +47,7 @@ class TimetablesController < ApplicationController
   def edit
 		@timetable = Timetable.find(params[:id])
 		if @timetable.time_out == nil
-			@timetable.update(time_out: DateTime.now())
+			@timetable.update(time_out: DateTime.now() - 4.hour)
       @clocked_in = 0
 		end
 	end
