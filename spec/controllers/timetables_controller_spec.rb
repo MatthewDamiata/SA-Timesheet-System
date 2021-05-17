@@ -59,7 +59,8 @@ RSpec.describe TimetablesController, type: :controller do
 		 
 		 it "filters the hours by date" do
 			 get :index
-			 expect(Timetable.where({:user_id => @user.id, time_in:DateTime.new(2021,3,10)..(DateTime.new(2021,3,30) + 1.day) }).size).to eq(1)
+			 time = Timetable.filter_dates(DateTime.new(2021,3,10),DateTime.new(2021,3,30) + 1.day, @user.id)
+			 expect(time.size).to eq(1)
 		 end
 		 
 	 end
