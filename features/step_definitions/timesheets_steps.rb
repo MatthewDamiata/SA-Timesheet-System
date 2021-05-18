@@ -17,9 +17,6 @@ Then /^I will see "([^"]*)"$/ do |message|
 end
 
 
-
-
-
 Given /the following authorizations exist/ do |authorizations_table|
   authorizations_table.hashes.each do |authorization|
     Authorization.create! authorization
