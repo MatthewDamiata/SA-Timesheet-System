@@ -3,14 +3,25 @@
 %br
 .printer
   %h6 Date Selector
-  = label_tag :timetable_from_date, "From: "
-  = date_select "timetable", "fromdate"
-  = label_tag :timetable_to_date, "To: "
-  = date_select "timetable", "todate"
-  = submit_tag "Update"
+  = form_tag timetables_path, method: :get, id: 'dates_form' do
+    = label_tag :fromdate, "From: "
+    
+    - if @fromdate != nil
+      = date_select "timetable", "fromdate", selected: @fromdate
+    - else
+      = date_select "timetable", "fromdate"
+      
+    = label_tag :todate, "To: "
+    
+    - if @todate != nil
+      = date_select "timetable", "todate", selected: @todate
+    - else
+      = date_select "timetable", "todate"
+      
+    = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
 
 .printer
-  = link_to 'Print Timesheet', 'print', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
+  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
 
 %br
 .clockinbutton

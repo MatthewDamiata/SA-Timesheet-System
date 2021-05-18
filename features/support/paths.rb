@@ -29,13 +29,8 @@ module NavigationHelpers
    when /^press the (.*)$/ then
      find('SAlogo.png').click
 	 when /^the edit timetable page for "([^"]+)"$/
-		  p Timetable.all
-			p Timetable.find_by(id: $1)
-		  p DateTime.now()
       edit_timetable_path(Timetable.find_by(id: $1))
 	 when /^the show timetable page for "([^"]+)"$/
-		  p Timetable.all
-			p Timetable.find_by(time_in: $1)
 			timetable_path(Timetable.find_by(time_in: $1))
 	 
 

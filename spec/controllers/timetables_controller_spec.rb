@@ -30,7 +30,11 @@ RSpec.describe TimetablesController, type: :controller do
      session[:user_id] = @user.id
      @current_user = @user
    end 
-	 describe "index" do 
+		describe "index" do
+		  before(:each) do
+				 @time1 = Timetable.create(time_in:DateTime.new(2021,3,10),time_out:DateTime.new(2021,3,10),notes:"",user_id:"1")
+				 @time2 = Timetable.create(time_in:DateTime.new(2021,4,11),time_out:DateTime.new(2021,4,11),notes:"",user_id:"1")
+      end
 		
      it "gathers all the timeables fromt the current user" do
 			 get :index
@@ -41,6 +45,24 @@ RSpec.describe TimetablesController, type: :controller do
       get :index
       expect(response).to render_template(:index)
     end
+		 
+		 it "shows the amount of shifts" do
+			 get :index
+			 expect(assigns[:total_days]).to eq(Timetable.where(:user_id => @user.id).size)
+		 end
+		 
+		 
+		 it "shows the number of hours" do
+			 get :index
+			 expect(assigns[:total_hours]).not_to eq(nil)
+		 end
+		 
+		 it "filters the hours by date" do
+			 get :index
+			 time = Timetable.filter_dates(DateTime.new(2021,3,10),DateTime.new(2021,3,30) + 1.day, @user.id)
+			 expect(time.size).to eq(1)
+		 end
+		 
 	 end
 
 	

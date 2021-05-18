@@ -49,6 +49,29 @@ Given /the current time is "([^"]*)"$/ do |date|
   
 end
 
+Given /enter the inclusive from and to date/ do 
+  find('#timetable_fromdate_1i').find(:xpath, 'option[1]').select_option
+  find('#timetable_fromdate_2i').find(:xpath, 'option[2]').select_option
+  find('#timetable_fromdate_3i').find(:xpath, 'option[3]').select_option
+  find('#timetable_todate_1i').find(:xpath, 'option[8]').select_option
+  find('#timetable_todate_2i').find(:xpath, 'option[2]').select_option
+  find('#timetable_todate_3i').find(:xpath, 'option[3]').select_option
+end
+
+Given /enter the exclusive from and to date/ do 
+  find('#timetable_fromdate_1i').find(:xpath, 'option[8]').select_option
+  find('#timetable_fromdate_2i').find(:xpath, 'option[2]').select_option
+  find('#timetable_fromdate_3i').find(:xpath, 'option[3]').select_option
+  find('#timetable_todate_1i').find(:xpath, 'option[8]').select_option
+  find('#timetable_todate_2i').find(:xpath, 'option[4]').select_option
+  find('#timetable_todate_3i').find(:xpath, 'option[3]').select_option
+end
+
+Given /I filter the dates from "([^"]*)" to "([^"]*)"/ do |start_time, end_time|
+	 DateTime.strptime(start_time,"%m/%d/%Y")
+   DateTime.strptime(end_time,"%m/%d/%Y") 
+end
+
 Then /the current time/ do 
 	current_time = DateTime.now()
 	current_time.strftime("%Y-%m-%d %h:%M")
