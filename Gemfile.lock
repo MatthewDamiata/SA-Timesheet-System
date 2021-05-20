@@ -177,7 +177,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.0)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    pg (1.2.3)
+    pg (0.21.0)
     public_suffix (4.0.6)
     racc (1.5.2)
     rack (1.6.13)
@@ -304,7 +304,7 @@ DEPENDENCIES
   omniauth
   omniauth-github
   omniauth-rails_csrf_protection
-  pg
+  pg (~> 0.18)
   rails (= 4.2.11.3)
   rails_12factor
   rspec-rails (= 3.7.2)
