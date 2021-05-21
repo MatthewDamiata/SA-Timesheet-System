@@ -14,8 +14,8 @@ Background: timetable seeds
 
 
   Given the following timetables exist:
-  |id | time_in              | time_out              | notes       |user_id|
-  |74 | 2021-05-12 05:20:48  | 2021-05-12 09:25:12  | big job     |   1   |
+  |id            | time_in              | time_out              | notes       |user_id|
+  |7400 | 2021-05-12 05:20:48  | 2021-05-12 09:25:12  | big job     |   1   |
 
 @omniauth_test14
 Scenario: I want to see the filtered timetables

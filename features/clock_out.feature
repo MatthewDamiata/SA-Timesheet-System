@@ -15,14 +15,14 @@ Background: timetable seeds
 
   Given the following timetables exist:
  |id | time_in                  | time_out             | notes        | user_id|
- |100 | 2021-05-11 13:15:11     |                      |             |  1      |
+ |646362 | 2021-05-11 13:15:11     |                      |             |  1      |
    
 @omniauth_test6
 Scenario: Clock Out
 	Given I am logged into timesheets
   When I go to the timetable page
   And  I follow "Clock Out"
-  Then I should be on the edit timetable page for "100"
+  Then I should be on the edit timetable page for "646362"
 	Then I should see "Back to Dashboard"
 	
 
