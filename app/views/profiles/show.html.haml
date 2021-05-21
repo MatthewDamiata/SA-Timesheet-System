@@ -1,8 +1,4 @@
 %p#notice= notice
-
-%p
-  %b Privilege:
-  = @profile.privilege
 %p
   %b Org:
   = @profile.org
@@ -15,10 +11,6 @@
 %p
   %b Manager:
   = @profile.manager_id
-%p
-  %b User:
-  = @profile.user
-
 = link_to 'Edit', edit_profile_path(@profile)
 \|
 = link_to 'Back', profiles_path

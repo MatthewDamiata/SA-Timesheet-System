@@ -7,22 +7,16 @@
           %li= message
 
   .field
-    = f.label :privilege
-    = f.number_field :privilege
-  .field
-    = f.label :org
+    = f.label :Organization
     = f.number_field :org
   .field
-    = f.label :org2
+    = f.label "Organization 2"
     = f.number_field :org2
   .field
-    = f.label :grad
-    = f.number_field :grad
+    = f.label "Grad Student"
+    = f.radio_button(:grad, "Yes")
   .field
-    = f.label :manager_id
+    = f.label "Manager ID"
     = f.number_field :manager_id
-  .field
-    = f.label :user
-    = f.text_field :user
   .actions
     = f.submit 'Save'
