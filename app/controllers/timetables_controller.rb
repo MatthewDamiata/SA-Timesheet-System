@@ -10,17 +10,7 @@ class TimetablesController < ApplicationController
   def index
     myid = current_user.id
     if params[:timetable] != nil
-      fromyear = params[:timetable]["fromdate(1i)"]
-      toyear = params[:timetable]["todate(1i)"]
-      frommonth = params[:timetable]["fromdate(2i)"]
-      tomonth = params[:timetable]["todate(2i)"]
-      fromday = params[:timetable]["fromdate(3i)"]
-      today = params[:timetable]["todate(3i)"]
-      final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
-      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i) 
-      @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
-      @fromdate = final_from_date
-      @todate  = final_to_date
+			sort_by_date  
     else
       @timetables = Timetable.get_user_timetables(myid)
     end
