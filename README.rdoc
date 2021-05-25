@@ -1,6 +1,0 @@
-SA Timesheet System
-CS445 - Software Engineering
-Matthew Damiata, Korhan Citlak, Ethan Breban, Benjamin Keurian, Joshua Szachar
-
-
-The current timesheet system that the SA uses has many faults in their UI, permissions, ease of use, and has an inability for users to edit previous responses (adding hours). Our goal is to create a new timesheet system without the previous faults for SA workers to clock in and clock out their hours to get paid accurately.
