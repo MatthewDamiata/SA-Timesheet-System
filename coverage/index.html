@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-05-24T20:07:15+00:00">2021-05-24T20:07:15+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-05-25T19:15:59+00:00">2021-05-25T19:15:59+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -30,7 +30,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.15
+         8.16
        </span>
     </span> hits/line
     )
@@ -198,7 +198,7 @@
             <td class="cell--number">5</td>
             <td class="cell--number">5</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">9.00</td>
+            <td class="cell--number">9.40</td>
             
           </tr>
         
@@ -403,7 +403,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         9.07
+         9.13
        </span>
     </span> hits/line
     )
@@ -472,7 +472,7 @@
             <td class="cell--number">5</td>
             <td class="cell--number">5</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">9.00</td>
+            <td class="cell--number">9.40</td>
             
           </tr>
         
@@ -4225,7 +4225,7 @@
 
             
 
-            <code class="ruby">      @timetables = Timetable.where({:user_id =&gt; myid, time_in: final_from_date..(final_to_date + 1.day) })</code>
+            <code class="ruby">      @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)</code>
           </li>
         </div>
       
@@ -4854,8 +4854,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="4">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="3" data-linenumber="4">
+            <span class="hits">3</span>
             
 
             

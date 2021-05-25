@@ -12,9 +12,11 @@ class TimetablesController < ApplicationController
     if params[:timetable] != nil
 			sort_by_date  
     else
+			#show all of the users timetables
       @timetables = Timetable.get_user_timetables(myid)
     end
 		convert_time
+		
   end
 
   # GET /timetables/1
@@ -25,6 +27,8 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
+		#flag that indicates whether the user currently on a shift
+		#prevents a user from spamming the clock in button
     @clocked_in = 1
 		
 	  @timetable= Timetable.create!(time_in: DateTime.now() - 4.hour, user_id: current_user.id)
@@ -42,6 +46,7 @@ class TimetablesController < ApplicationController
 		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now() - 4.hour)
       @clocked_in = 0
+			#reset the clocked_in flag to 0
 		end
 	end
 
@@ -73,6 +78,8 @@ class TimetablesController < ApplicationController
     def set_timetable
       @timetable = Timetable.find(params[:id])
     end
+		
+		#calculates the total hours and total shifts
 	  def convert_time
 			@total_days = @timetables.size
 			@total_hours = 0
@@ -95,6 +102,7 @@ class TimetablesController < ApplicationController
       params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id )
     end
   
+		#parses through the form to filter the dates
 	  def sort_by_date
 		  myid = current_user.id
 			fromyear = params[:timetable]["fromdate(1i)"]
@@ -105,7 +113,7 @@ class TimetablesController < ApplicationController
       today = params[:timetable]["todate(3i)"]
       final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
       final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i) 
-      @timetables = Timetable.where({:user_id => myid, time_in: final_from_date..(final_to_date + 1.day) })
+      @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
       @fromdate = final_from_date
       @todate  = final_to_date
 		end
