@@ -6,7 +6,7 @@ The current timesheet system that the SA uses has many faults in their UI, permi
 
 ### Development Build
 1. Clone the repo
-2. Run `$ bundle install --without production'`
+2. Run `$ bundle install --without production`
 3. Create an [OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) on GitHub
 4. Run `$ bundle exec figaro install`
 5. Edit `config/application.yml` to include the GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET
