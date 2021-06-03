@@ -1,5 +1,21 @@
 %h1#name
   = "#{current_user.name}'s Timesheet"
+%h4#orgs
+  - if @profile.org != nil
+    = "Group/Org#: #{@profile.org}"
+  - if @profile.org2 != nil
+    %br
+    = "Additional Group/Org#: #{@profile.org2}"
+  - if @profile.grad != nil
+    %br
+    - if @profile.grad == 0
+      = "Graduate Student: No"
+    - else
+      = "Graduate Student: No"
+%br
+.printer   
+  To find the payroll calendar dates, look
+  = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
 %br
 .printer
   %h6 Date Selector
@@ -19,9 +35,6 @@
       = date_select "timetable", "todate"
       
     = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
-
-.printer
-  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
 
 %br
 .clockinbutton
@@ -60,22 +73,22 @@
           - else
             = link_to 'Clock Out', edit_timetable_path(timetable),class: 'btn btn-light bg-dark text-light white'
 
-%table#timetables.table.table-striped.col-md-12.some{:style => "text-align: right;"}
+%table#timetables.table.col-md-4.some{:style => "margin-left: 67%; text-align: right;"}
   %thead
     %tr
-      %th Total Shifts
-      %th Total Hours   
+      %th Total Shifts: #{@total_days}
+      %th Total Hours: #{@total_hours}
       
-  %tbody
-    %tr
-      %td
-        = @total_days
-      %td
-        = @total_hours
-        
 .signatures
   %h4
-    Employee Signature:____________________________________________  Date:_______________________
+    %br
+    I certify to the best of my knowledge the hours and wages listed above are correct.
+.signatures
+  %h4
+    %br
+    Employee Signature:___________________________________________  Date:_______________________
     %br
     %br
-    Manager Signature:_____________________________________________  Date:_______________________
+    Manager Signature:____________________________________________  Date:_______________________
+.printer.some{:style => "margin-left: 89%;"}
+  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'

@@ -4,11 +4,11 @@ class TimetablesController < ApplicationController
  
   def print
     flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
-    p "sup"
   end
   
   def index
     myid = current_user.id
+    @profile = Profile.find_by(user_id: myid)
     if params[:timetable] != nil
 			sort_by_date  
     else
