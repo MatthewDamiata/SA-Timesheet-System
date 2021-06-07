@@ -13,7 +13,7 @@
     - else
       = "Graduate Student: No"
 %br
-.printer
+.printer   
   To find the payroll calendar dates, look
   = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
 %br
@@ -21,26 +21,26 @@
   %h6 Date Selector
   = form_tag timetables_path, method: :get, id: 'dates_form' do
     = label_tag :fromdate, "From: "
-
+    
     - if @fromdate != nil
       = date_select "timetable", "fromdate", selected: @fromdate
     - else
       = date_select "timetable", "fromdate"
-
+      
     = label_tag :todate, "To: "
-
+    
     - if @todate != nil
       = date_select "timetable", "todate", selected: @todate
     - else
       = date_select "timetable", "todate"
-
+      
     = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
 
 %br
 .clockinbutton
   - if @found_clocked == 0
     = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
-
+    
 %table#timetables.table.table-striped.col-md-12
   %thead
     %tr
@@ -50,7 +50,7 @@
       %th Notes
       %th
       %th
-
+      
   %tbody
     - @timetables.each do |timetable|
       %tr
@@ -61,7 +61,8 @@
             = timetable.time_out.strftime("%m/%d/%Y - %l:%M %p")
         %td
           - if timetable.time_out != nil
-            = ((timetable.time_out.to_time - timetable.time_in.to_time) / 3600).round(2)
+            -#= ((timetable.time_out.to_time - timetable.time_in.to_time) / 3600).round(2)
+            = (((((timetable.time_out.to_time - timetable.time_in.to_time) / 3600)*4).round())/4.0).round(2)
         %td
           = timetable.notes
         %td
@@ -78,7 +79,7 @@
     %tr
       %th Total Days: #{@total_days}
       %th Total Hours: #{@total_hours}
-
+      
 .signatures
   %h4
     %br

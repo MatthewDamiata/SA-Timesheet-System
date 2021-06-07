@@ -1,22 +1,22 @@
 require 'date'
 class TimetablesController < ApplicationController
 	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
-
+ 
   def print
     flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
   end
-
+  
   def index
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     if params[:timetable] != nil
-			sort_by_date
+			sort_by_date  
     else
 			#show all of the users timetables
       @timetables = Timetable.get_user_timetables(myid)
     end
 		convert_time
-
+		
   end
 
   # GET /timetables/1
@@ -30,12 +30,12 @@ class TimetablesController < ApplicationController
 		#flag that indicates whether the user currently on a shift
 		#prevents a user from spamming the clock in button
     @clocked_in = 1
-
+		
 	  @timetable= Timetable.create!(time_in: DateTime.now() - 4.hour, user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
-    #@timetable= Timetable.create!(:time_in=>DateTime.now())
-
+    #@timetable= Timetable.create!(:time_in=>DateTime.now())	
+	
     flash[:notice] = "You have successfully clocked in!"
 		redirect_to timetables_path
   end
@@ -78,29 +78,26 @@ class TimetablesController < ApplicationController
     def set_timetable
       @timetable = Timetable.find(params[:id])
     end
-
-		#calculates the total hours and total shifts
+		
+		#Calculates the total hours and total shifts
 	  def convert_time
-      #timetables.size - Accounts for date filtering
-      #Goal: Get # of unique days repped by timetables
-      #Time Documentation: https://ruby-doc.org/stdlib-2.6.1/libdoc/date/rdoc/DateTime.html
       all_dates = Array.new
       @timetables.each do |x|
         time_in = x.time_in #Clock in
         all_dates.push(time_in.day)
       end
-      #uniq - Returns the array w/o duplicates; Doesn't change original array
-      @total_days = all_dates.uniq.length
+      @total_days = all_dates.uniq.length 
 			@total_hours = 0
 			temp = 0
 			@found_clocked = 0
-			@timetables.each do |x|
+			@timetables.each do |x| 
 				if x.time_out == nil
 					@found_clocked = 1
 				end
 				if x.time_out != nil and x.time_in != nil
 					temp = (x.time_out.to_time - x.time_in.to_time)
-					@total_hours += (temp / 3600)
+          #Rounding to a quarter: (round(num * 4))/4
+          @total_hours += (((temp / 3600)*4).round())/4.0
 				end
 			end
 			@total_hours = @total_hours.round(2)
@@ -110,7 +107,7 @@ class TimetablesController < ApplicationController
     def timetable_params
       params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id )
     end
-
+  
 		#parses through the form to filter the dates
 	  def sort_by_date
 		  myid = current_user.id
@@ -121,10 +118,10 @@ class TimetablesController < ApplicationController
       fromday = params[:timetable]["fromdate(3i)"]
       today = params[:timetable]["todate(3i)"]
       final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
-      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i)
+      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i) 
       @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
       @fromdate = final_from_date
       @todate  = final_to_date
 		end
-
+  
 end
