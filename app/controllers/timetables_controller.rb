@@ -1,12 +1,14 @@
 require 'date'
+require 'active_support/time'
 class TimetablesController < ApplicationController
 	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
- 
+  Time.zone = 'Eastern Time (US & Canada)'
   def print
     flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
   end
   
   def index
+    Time.zone = 'Eastern Time (US & Canada)'
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     if params[:timetable] != nil
@@ -27,11 +29,12 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/new
   def new
+    Time.zone = 'Eastern Time (US & Canada)'
 		#flag that indicates whether the user currently on a shift
 		#prevents a user from spamming the clock in button
     @clocked_in = 1
 		
-	  @timetable= Timetable.create!(time_in: DateTime.now() - 4.hour, user_id: current_user.id)
+	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
     #@timetable= Timetable.create!(:time_in=>DateTime.now())	
@@ -42,9 +45,10 @@ class TimetablesController < ApplicationController
 
   # GET /timetables/1/edit
   def edit
+    Time.zone = 'Eastern Time (US & Canada)'
 		@timetable = Timetable.find(params[:id])
 		if @timetable.time_out == nil
-			@timetable.update(time_out: DateTime.now() - 4.hour)
+			@timetable.update(time_out: DateTime.now())
       @clocked_in = 0
 			#reset the clocked_in flag to 0
 		end
