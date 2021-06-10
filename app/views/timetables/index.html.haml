@@ -16,7 +16,6 @@
 .printer   
   To find the payroll calendar dates, look
   = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
-
 %br
 .printer
   %h6 Date Selector
@@ -50,6 +49,8 @@
       %th Time Out
       %th Hours
       %th Notes
+      - if @profile.org != nil && (@profile.org == 9200 || @profile.org == 9800 || @profile.org == 7160 || @profile.org == 8500 || @profile.org == 7400)
+        %th Department
       %th
       %th
       
@@ -71,6 +72,9 @@
             = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
         %td
           = @timetables[i].notes
+        - if @profile.org != nil && (@profile.org == 9200 || @profile.org == 9800 || @profile.org == 7160 || @profile.org == 8500 || @profile.org == 7400)
+          %td
+            = @profile.org 
         %td
           - if @timetables[i].time_out != nil
             = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
@@ -81,10 +85,12 @@
             = link_to 'Clock Out', edit_timetable_path(@timetables[i]),class: 'btn btn-light bg-dark text-light white'
       - if i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W"))
         %td
+        %td
         %th Total Week #{week}
         %td
           = @weekly_hours[week-1]
         - week += 1
+
 %table#timetables.table.col-md-4.some{:style => "margin-left: 67%; text-align: right;"}
   %thead
     %tr
@@ -98,9 +104,9 @@
 .signatures
   %h4
     %br
-    Employee Signature:___________________________________________  Date:_______________________
+    Employee Signature:________________________________________  Date:___________________
     %br
     %br
-    Manager Signature:____________________________________________  Date:_______________________
+    Manager Signature:_________________________________________  Date:___________________
 .printer.some{:style => "margin-left: 89%;"}
   = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
