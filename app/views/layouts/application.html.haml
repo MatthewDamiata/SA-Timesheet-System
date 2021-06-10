@@ -11,7 +11,9 @@
       .banner_text
         Employee Time Sheet
         - unless @action == 'login'
-          = button_to " Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
+          .row
+            = button_to "Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
+            = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
     .container
       .flash
         = render 'layouts/flash'

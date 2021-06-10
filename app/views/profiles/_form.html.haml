@@ -8,15 +8,15 @@
 
   .field
     = f.label :Organization
-    = f.number_field :org
+    = f.text_field :org
   .field
     = f.label "Organization 2"
-    = f.number_field :org2
+    = f.text_field :org2
   .field
     = f.label "Grad Student"
     = f.radio_button(:grad, "Yes")
   .field
     = f.label "Manager ID"
-    = f.number_field :manager_id
+    = f.text_field :manager_id
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', :class => 'btn bg-dark text-light white'
