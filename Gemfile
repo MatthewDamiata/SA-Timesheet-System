@@ -38,6 +38,7 @@ gem 'factory_girl_rails'
 gem 'omniauth-rails_csrf_protection'  # protects against recently discovered vulnerability
 gem 'omniauth'                        # flexible, multi-provider authentication library
 gem 'omniauth-github'                 # omniauth strategy for provider github
+gem 'omniauth-google-oauth2'
 gem 'figaro'                          # keeps our secrets safe
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

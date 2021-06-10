@@ -5,8 +5,10 @@
 	validate :staff_or_student
 	
 	def staff_or_student
-    errors.add(:email, "must be for Binghamton University") if
-    email.split('@')[1] != "binghamton.edu"
+    after_split = email.split('@')[1]
+    if after_split != "binghamton.edu" && after_split != "binghamtonsa.org"
+      errors.add(:email, "must be for Binghamton University or Binghamton SA")
+    end
   end
 	
 	

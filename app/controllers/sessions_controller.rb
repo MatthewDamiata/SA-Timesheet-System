@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
 				@user = User.find_with_auth_hash(auth_hash['info'])
 				self.current_user= auth.user
 				session[:user_id] = auth.user.id 
-				message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
+				message = "Welcome back #{@user.name}! You have logged in via Google."
         flash[:notice] = message
         redirect_to timetables_path
       else # immediately before your register code
@@ -65,7 +65,7 @@ class SessionsController < ApplicationController
 
 				self.current_user= auth.user
 				@profile = @user.create_profile
-				message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
+				message = "Welcome #{@user.name}! You have signed up via Google."
 				flash[:notice] = message
 
 				redirect_to edit_user_profile_path(@user,@profile) 
