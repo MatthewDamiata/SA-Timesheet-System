@@ -5,7 +5,7 @@ class Timetable < ActiveRecord::Base
 	end
   
 	def self.get_user_timetables(myid)
-		Timetable.where({:user_id => myid})
+		Timetable.where({:user_id => myid}).order('time_in ASC')
 	end
   
 end
