@@ -1,15 +1,11 @@
-%p#notice= notice
 %p
-  %b Org:
+  %b Organization:
   = @profile.org
 %p
-  %b Org2:
+  %b Second Organization:
   = @profile.org2
 %p
   %b Grad:
   = @profile.grad
-%p
-  %b Manager:
-  = @profile.manager_id
 = link_to 'Edit', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
 = link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'

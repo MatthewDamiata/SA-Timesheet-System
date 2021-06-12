@@ -11,7 +11,9 @@
     - if @profile.grad == 0
       = "Graduate Student: No"
     - else
-      = "Graduate Student: No"
+      = "Graduate Student: Yes"
+.printer
+  = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
 %br
 .printer   
   To find the payroll calendar dates, look

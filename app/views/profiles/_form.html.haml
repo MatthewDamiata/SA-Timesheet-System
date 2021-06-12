@@ -7,16 +7,13 @@
           %li= message
 
   .field
-    = f.label :Organization
-    = f.text_field :org
+    = f.label "Organization "
+    = f.select(:org, Organization.all.collect{|org| [org.num.to_s + " " + org.name, org.num]}, {prompt: 'Select an organization'})
   .field
-    = f.label "Organization 2"
-    = f.text_field :org2
+    = f.label "Second Organization "
+    = f.select(:org2, Organization.all.collect{|org| [org.num.to_s + " " + org.name, org.num]}, {prompt: 'Select an organization'})
   .field
-    = f.label "Grad Student"
-    = f.radio_button(:grad, "Yes")
-  .field
-    = f.label "Manager ID"
-    = f.text_field :manager_id
+    = f.label "Graduate Student"
+    = f.check_box :grad
   .actions
-    = f.submit 'Save', :class => 'btn bg-dark text-light white'
+    = f.submit 'Save', :class=> 'btn bg-dark text-light white'
