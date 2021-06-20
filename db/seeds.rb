@@ -9,7 +9,7 @@ require 'csv'
 
 CSV.foreach(Rails.root.join('db/organizations.csv')) do |row|
   Organization.create({
-    num: row[1],
-    name: row[2],
+    num: row[0],
+    name: row[1],
   })
 end
