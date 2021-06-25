@@ -28,7 +28,7 @@
         = date_select "timetable", "fromdate", selected: @fromdate
       - else
         = date_select "timetable", "fromdate"
-
+        
       = label_tag :todate, "To: "
 
       - if @todate != nil
@@ -108,9 +108,15 @@
 .signatures
   %h4
     %br
-    Employee Signature:________________________________________  Date:___________________
+    Employee Signature:________________________________________
     %br
     %br
-    Manager Signature:_________________________________________  Date:___________________
+    Date:___________________
+    %br
+    %br
+    Manager Signature:_________________________________________
+    %br
+    %br
+    Date:___________________
 .printer.some{:style => "margin-left: 89%;"}
   = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
