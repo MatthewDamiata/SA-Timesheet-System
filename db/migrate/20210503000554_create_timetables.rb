@@ -5,6 +5,7 @@ class CreateTimetables < ActiveRecord::Migration
       t.datetime :time_out
       t.string :notes
       t.integer :user_id
+      t.text :clockout_org
 
       t.timestamps null: false
     end

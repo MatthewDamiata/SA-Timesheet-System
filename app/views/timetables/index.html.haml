@@ -51,8 +51,7 @@
       %th Time Out
       %th Hours
       %th Notes
-      - if @profile.org != nil && (@profile.org == 9200 || @profile.org == 9800 || @profile.org == 7160 || @profile.org == 8500 || @profile.org == 7400)
-        %th Department
+      %th Department
       %th
       %th
       
@@ -74,9 +73,8 @@
             = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
         %td
           = @timetables[i].notes
-        - if @profile.org != nil && (@profile.org == 9200 || @profile.org == 9800 || @profile.org == 7160 || @profile.org == 8500 || @profile.org == 7400)
-          %td
-            = @profile.org 
+        %td
+          = @timetables[i].clockout_org
         %td
           .printer
             - if @timetables[i].time_out != nil
@@ -110,12 +108,9 @@
     %br
     Employee Signature:________________________________________
     %br
-    %br
     Date:___________________
     %br
-    %br
     Manager Signature:_________________________________________
-    %br
     %br
     Date:___________________
 .printer.some{:style => "margin-left: 89%;"}

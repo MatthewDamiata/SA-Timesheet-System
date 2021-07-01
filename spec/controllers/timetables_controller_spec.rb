@@ -32,8 +32,8 @@ RSpec.describe TimetablesController, type: :controller do
    end 
 		describe "index" do
 		  before(:each) do
-				 @time1 = Timetable.create(time_in:DateTime.new(2021,3,10),time_out:DateTime.new(2021,3,10),notes:"",user_id:"1")
-				 @time2 = Timetable.create(time_in:DateTime.new(2021,4,11),time_out:DateTime.new(2021,4,11),notes:"",user_id:"1")
+				 @time1 = Timetable.create(time_in:DateTime.new(2021,3,10),time_out:DateTime.new(2021,3,10),notes:"",user_id:"1",clockout_org: "")
+				 @time2 = Timetable.create(time_in:DateTime.new(2021,4,11),time_out:DateTime.new(2021,4,11),notes:"",user_id:"1",clockout_org: "")
       end
 		
      it "gathers all the timeables fromt the current user" do
@@ -92,7 +92,7 @@ RSpec.describe TimetablesController, type: :controller do
       let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "2021-04-20 05:20:48")}
 		 
 		  let(:id2) {'2'}
-      let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil, notes:"", user_id:"1")}
+      let(:time2) {instance_double('Timetable', time_in: "2021-04-20 06:20:48", time_out: nil, notes:"", user_id:"1", clockout_org:"")}
 		 
 		  before(:each) do
         allow(Timetable).to receive(:find).with(id1).and_return(time1)
@@ -136,7 +136,7 @@ RSpec.describe TimetablesController, type: :controller do
 		let(:id1) {'1'}
     let(:time1) {instance_double('Timetable', time_in: "2021-04-20 05:20:48", time_out: "", notes: "N/A")}
 		 before(:each) do
-       @time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"")
+       @time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"",clockout_org:"")
       end
 		
 	  it "Deletes a timetable" do
@@ -148,12 +148,17 @@ RSpec.describe TimetablesController, type: :controller do
 	
 	describe "update" do
 		before(:all) do
-			@time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"")
-			@time2 = Timetable.create(time_in:"",time_out:nil ,notes:"",user_id:"")
+			@time1 = Timetable.create(time_in:"",time_out:"",notes:"",user_id:"",clockout_org:"")
+			@time2 = Timetable.create(time_in:"",time_out:nil ,notes:"",user_id:"",clockout_org:nil)
 		end
 		it "updates the timetable notes" do
 			@time1.update(notes:"Updated!")
 			expect(Timetable.find_by_notes("Updated!")).to eq(@time1)
+		end
+
+		it "updates the timetable clock out org" do
+			@time2.update(clockout_org:"Updated!")
+			expect(@time2.clockout_org).not_to eq(nil)
 		end
 		
 		it "updates when time out is nil" do 

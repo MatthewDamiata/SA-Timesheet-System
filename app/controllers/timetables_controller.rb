@@ -122,7 +122,7 @@ class TimetablesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def timetable_params
       Time.zone = 'Eastern Time (US & Canada)'
-      params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id )
+      params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id, :clockout_org )
     end
   
 		#parses through the form to filter the dates
@@ -141,5 +141,4 @@ class TimetablesController < ApplicationController
       @fromdate = final_from_date
       @todate  = final_to_date
 		end
-  
 end

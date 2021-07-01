@@ -7,11 +7,11 @@
           %li= message
 
   .field
-    = f.label "Organization "
-    = f.select(:org, Organization.all.collect{|org| [org.num.to_s + " " + org.name, org.num]}, {prompt: 'Select an organization'})
+    = f.label "Organization"
+    = f.select(:org, Organization.all.collect{|org| [org.num + " " + org.name, org.num]}, {prompt: 'Select an organization'})
   .field
-    = f.label "Second Organization "
-    = f.select(:org2, Organization.all.collect{|org| [org.num.to_s + " " + org.name, org.num]}, {prompt: 'Select an organization'})
+    = f.label "Second Organization"
+    = f.select(:org2, Organization.all.collect{|org| [org.num + " " + org.name, org.num]}, {prompt: 'Select an organization'})
   .field
     = f.label "Graduate Student"
     = f.check_box :grad

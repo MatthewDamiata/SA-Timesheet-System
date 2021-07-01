@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :organization do
-    num 1
+    num "MyString"
     name "MyString"
   end
 end

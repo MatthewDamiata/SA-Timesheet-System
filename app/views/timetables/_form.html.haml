@@ -5,7 +5,9 @@
       %ul
         - @timetable.errors.full_messages.each do |message|
           %li= message
-
+  .field
+    = f.label "For Clock Out Only:"
+    = f.select(:clockout_org, Organization.all.collect{|org| [org.num + " " + org.name, org.num]}, {prompt: 'Select an organization'})
   .field
     = f.label :notes
     = f.text_field :notes

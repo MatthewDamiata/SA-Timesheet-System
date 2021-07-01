@@ -4,5 +4,6 @@ FactoryGirl.define do
     time_out "2021-05-03 00:05:54"
     notes "MyString"
     user_id 1
+    clockout_org "MyString"
   end
 end
