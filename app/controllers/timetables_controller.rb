@@ -7,6 +7,10 @@ class TimetablesController < ApplicationController
     flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
   end
   
+  def setupOrgs
+    @selectedOrgs = Array[@profile.org, @profile.org2]
+  end
+  
   def index
     Time.zone = 'Eastern Time (US & Canada)'
     myid = current_user.id
@@ -47,12 +51,15 @@ class TimetablesController < ApplicationController
   # GET /timetables/1/edit
   def edit
     Time.zone = 'Eastern Time (US & Canada)'
+    myid = current_user.id
+    @profile = Profile.find_by(user_id: myid)
 		@timetable = Timetable.find(params[:id])
 		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now())
       @clocked_in = 0
 			#reset the clocked_in flag to 0
 		end
+    setupOrgs
 	end
 
   def create
