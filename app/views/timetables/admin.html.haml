@@ -1,0 +1,5 @@
+%h1 User Timesheets
+- for i in 0..@profile.length()-1 do
+    - if @profile[i].any? #Handles nil
+        %li= link_to @profile[i][0].name, edit_timetable_path(@profile[i][0].id)
+= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'

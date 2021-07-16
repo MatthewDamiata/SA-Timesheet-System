@@ -88,6 +88,12 @@ class TimetablesController < ApplicationController
     redirect_to timetables_url
   end
 
+  # GET /timetables/admin
+  def admin
+    Time.zone = 'Eastern Time (US & Canada)'
+    @profile = Profile.all.collect{|prof| [prof.user]}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_timetable

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 	end
 	get 'timesheets/landing', :as => :timesheets_landing
   root 'timesheets#landing'
+  get 'timetables/admin' => 'timetables#admin'
+  post 'timetables/admin' => 'timetables#admin'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
