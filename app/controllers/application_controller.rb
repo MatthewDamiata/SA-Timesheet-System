@@ -25,4 +25,9 @@ class ApplicationController < ActionController::Base
   def current_user=(user)
 		@current_user = user
 	end
+
+  #determine if admin user
+  def admins
+    @admins = Admin.all.collect{|x| x.email}
+  end
 end

@@ -21,3 +21,9 @@ CSV.foreach(Rails.root.join('db/organizations.csv')) do |row|
     name: row[1]
   })
 end
+
+CSV.foreach(Rails.root.join('db/admins.csv')) do |row|
+  Admin.create({
+    email: row[0]
+  })
+end

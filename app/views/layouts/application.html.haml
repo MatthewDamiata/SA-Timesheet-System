@@ -10,8 +10,9 @@
       = image_tag "SAlogo.png"
       .banner_text
         - unless @action == 'login'
-          = button_to " View Users", timetables_admin_path, class: "btn btn-light bg-dark text-light white"
-          = button_to "Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
+          - if @admin_user
+            = button_to " View Users", timetables_admin_path, class: "btn btn-light bg-dark text-light white"
+          = button_to " Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
     .container
       .flash
         = render 'layouts/flash'
