@@ -15,7 +15,7 @@ class TimetablesController < ApplicationController
     Time.zone = 'Eastern Time (US & Canada)'
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
-    @admin_user = admins.include? current_user.email
+    @admin_user = admins.to_s.include? current_user.email.to_s
     if params[:timetable] != nil
 			sort_by_date  
     else
@@ -54,7 +54,7 @@ class TimetablesController < ApplicationController
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
 		@timetable = Timetable.find(params[:id])
-    @admin_user = admins.include? current_user.email
+    @admin_user = admins.to_s.include? current_user.email.to_s
 		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now())
       @clocked_in = 0
