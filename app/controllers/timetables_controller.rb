@@ -95,6 +95,22 @@ class TimetablesController < ApplicationController
     @profile = Profile.all.collect{|prof| [prof.user]}
   end
 
+  # GET /timetables/admin/1
+  #Note: Exclusively used for admin viewing other timesheets
+  def user
+    Time.zone = 'Eastern Time (US & Canada)'
+    id = params[:id]
+    @profile = Profile.find_by(user_id: id)
+    @name = @profile.user.name
+    if params[:timetable] != nil
+			sort_by_date  
+    else
+			#show all of the users timetables
+      @timetables = Timetable.get_user_timetables(id)
+    end
+		convert_time
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_timetable

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   root 'timesheets#landing'
   get 'timetables/admin' => 'timetables#admin'
   post 'timetables/admin' => 'timetables#admin'
+  get 'timetables/admin/:id' => 'timetables#user'
+  post 'timetables/admin/:id' => 'timetables#user'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

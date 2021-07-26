@@ -1,0 +1,118 @@
+= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
+%h1#name
+  = "#{@name}'s Timesheet"
+%h4#orgs.some{:style => "line-height: 140%"}
+  - if @profile.org != nil
+    = "Group/Org#: #{@profile.org}"
+  - if @profile.org2 != nil
+    %br
+    = "Additional Group/Org#: #{@profile.org2}"
+  - if @profile.grad != nil
+    %br
+    - if @profile.grad == 0
+      = "Graduate Student: No"
+    - else
+      = "Graduate Student: Yes"
+.printer
+  = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
+%br
+.printer   
+  To find the payroll calendar dates, look
+  = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
+  %br
+  .printer
+    %h6 Date Selector
+    = form_tag timetables_path, method: :get, id: 'dates_form' do
+      = label_tag :fromdate, "From: "
+
+      - if @fromdate != nil
+        = date_select "timetable", "fromdate", selected: @fromdate
+      - else
+        = date_select "timetable", "fromdate"
+        
+      = label_tag :todate, "To: "
+
+      - if @todate != nil
+        = date_select "timetable", "todate", selected: @todate
+      - else
+        = date_select "timetable", "todate"
+
+      = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
+
+%br
+.clockinbutton.some{:style => "margin-bottom: 20px;"}
+  - if @found_clocked == 0
+    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
+    
+%table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
+  %thead
+    %tr
+      %th Day
+      %th Time In
+      %th Time Out
+      %th Hours
+      %th Notes
+      %th Department
+      %th
+      %th
+      
+  %tbody
+    - week = 1
+    - for i in 0..@timetables.length()-1 do
+      %tr
+        %td
+          - if @timetables[i].time_in != nil
+            = @timetables[i].time_in.strftime("%m/%d/%Y")
+        %td
+          - if @timetables[i].time_in != nil
+            = @timetables[i].time_in.strftime("%l:%M %p")
+        %td
+          - if @timetables[i].time_out != nil
+            = @timetables[i].time_out.strftime("%l:%M %p")
+        %td
+          - if @timetables[i].time_out != nil && @timetables[i].time_in != nil
+            = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
+        %td
+          = @timetables[i].notes
+        %td
+          = @timetables[i].clockout_org
+        %td
+          .printer
+            - if @timetables[i].time_out != nil
+              = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
+        %td
+          .printer
+            - if @timetables[i].time_out != nil
+              = link_to 'Delete', timetable_path(@timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
+            - else
+              = link_to 'Clock Out', edit_timetable_path(@timetables[i]),class: 'btn btn-light bg-dark text-light white'
+      - if i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W"))
+        %td
+        %td
+        %th Total Week #{week}
+        %td
+          = @weekly_hours[week-1]
+        - week += 1
+
+%table#timetables.table.col-md-4.some{:style => "margin-left: 67%; text-align: right;"}
+  %thead
+    %tr
+      %th Total Days: #{@total_days}
+      %th Total Hours: #{@total_hours}
+      
+.signatures
+  %h4
+    %br
+    I certify to the best of my knowledge the hours and wages listed above are correct.
+.signatures
+  %h4
+    %br
+    Employee Signature:________________________________________
+    %br
+    Date:___________________
+    %br
+    Manager Signature:_________________________________________
+    %br
+    Date:___________________
+.printer.some{:style => "margin-left: 89%;"}
+  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
