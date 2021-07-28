@@ -38,12 +38,7 @@
         = date_select "timetable", "todate"
 
       = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
-
-%br
-.clockinbutton.some{:style => "margin-bottom: 20px;"}
-  - if @found_clocked == 0
-    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
-    
+  
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
     %tr
@@ -79,13 +74,11 @@
         %td
           .printer
             - if @timetables[i].time_out != nil
-              = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
+              = link_to "Edit", timetables_user_edit_path(@id, @timetables[i]), class: 'btn btn-primary text-light white'
         %td
           .printer
             - if @timetables[i].time_out != nil
-              = link_to 'Delete', timetable_path(@timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
-            - else
-              = link_to 'Clock Out', edit_timetable_path(@timetables[i]),class: 'btn btn-light bg-dark text-light white'
+              = link_to 'Delete', timetables_user_edit_path(@id, @timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
       - if i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W"))
         %td
         %td

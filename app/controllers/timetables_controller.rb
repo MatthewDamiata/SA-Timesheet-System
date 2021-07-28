@@ -100,6 +100,7 @@ class TimetablesController < ApplicationController
   def user
     Time.zone = 'Eastern Time (US & Canada)'
     id = params[:id]
+    @id = id
     @profile = Profile.find_by(user_id: id)
     @name = @profile.user.name
     if params[:timetable] != nil
@@ -109,6 +110,31 @@ class TimetablesController < ApplicationController
       @timetables = Timetable.get_user_timetables(id)
     end
 		convert_time
+  end
+
+  # GET /timetables/admin/1/1
+  #Note: Exclusively used for admin viewing other timesheets
+  def user_edit
+    Time.zone = 'Eastern Time (US & Canada)'
+    id = params[:id]
+    @profile = Profile.find_by(user_id: id)
+		@timetable = Timetable.find(params[:table_id])
+    @admin_user = admins.to_s.include? current_user.email.to_s
+		if @timetable.time_out == nil
+			@timetable.update(time_out: DateTime.now())
+      @clocked_in = 0
+			#reset the clocked_in flag to 0
+		end
+    setupOrgs
+  end
+
+  # DELETE /timetables/admin/1
+  def user_destroy
+    Time.zone = 'Eastern Time (US & Canada)'
+    @timetable = Timetable.find(params[:table_id])
+    @timetable.destroy
+		flash[:notice]= 'Timetable was successfully destroyed.'
+    redirect_to timetables_user_url
   end
 
   private
