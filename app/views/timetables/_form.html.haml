@@ -8,11 +8,11 @@
   - if @admin_user
     .field
       = f.label :start
-      = f.text_field :time_in, value: @timetable.time_in.strftime("%l:%M:%S %p %m-%d-%Y")
+      = f.text_field :time_in
 
     .field
       = f.label :end
-      = f.text_field :time_out, value: @timetable.time_out.strftime("%l:%M:%S %p %m-%d-%Y")
+      = f.text_field :time_out
   
   .field
     = f.label "Organization:"
