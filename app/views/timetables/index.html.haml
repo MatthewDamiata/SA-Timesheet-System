@@ -15,9 +15,10 @@
 .printer
   = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
 %br
-.printer   
+.printer
   To find the payroll calendar dates, look
   = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
+  %br
   %br
   .printer
     %h6 Date Selector
@@ -28,7 +29,7 @@
         = date_select "timetable", "fromdate", selected: @fromdate
       - else
         = date_select "timetable", "fromdate"
-        
+
       = label_tag :todate, "To: "
 
       - if @todate != nil
@@ -42,7 +43,7 @@
 .clockinbutton.some{:style => "margin-bottom: 20px;"}
   - if @found_clocked == 0
     = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
-    
+
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
     %tr
@@ -54,7 +55,7 @@
       %th Department
       %th
       %th
-      
+
   %tbody
     - week = 1
     - for i in 0..@timetables.length()-1 do
@@ -98,7 +99,7 @@
     %tr
       %th Total Days: #{@total_days}
       %th Total Hours: #{@total_hours}
-      
+
 .signatures
   %h4
     %br
@@ -106,12 +107,11 @@
 .signatures
   %h4
     %br
-    Employee Signature:________________________________________
     %br
-    Date:___________________
+    Employee Signature:____________________________  Date:___________________
     %br
-    Manager Signature:_________________________________________
     %br
-    Date:___________________
+    %br
+    Manager Signature:_____________________________ Date:___________________
 .printer.some{:style => "margin-left: 89%;"}
   = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
