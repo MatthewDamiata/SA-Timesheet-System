@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.3'
+ruby '2.6.6'
 
 # Other gems here . . .
 #Use Haml as the templating library
