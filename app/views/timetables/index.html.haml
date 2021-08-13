@@ -1,5 +1,7 @@
 %h1#name
   = "#{current_user.name}'s Timesheet"
+%h2#email
+  = "#{current_user.email}"
 %h4#orgs.some{:style => "line-height: 140%"}
   - if @profile.org != nil
     = "Group/Org#: #{@profile.org}"
@@ -103,7 +105,7 @@
 .signatures
   %h4
     %br
-    I certify to the best of my knowledge the hours and wages listed above are correct.
+    I certify to the best of my knowledge the hours listed above are correct.
 .signatures
   %h4
     %br
