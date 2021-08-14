@@ -6,7 +6,7 @@ class TimetablesController < ApplicationController
   def print
     flash[:notice] = "You successfully printed your timesheet. Please sign and deliver to your manager."
   end
-  
+
   def setupOrgs
     @selectedOrgs = Array[@profile.org, @profile.org2]
   end
@@ -17,7 +17,7 @@ class TimetablesController < ApplicationController
     @profile = Profile.find_by(user_id: myid)
     @admin_user = admins.to_s.include? current_user.email.to_s
     if params[:timetable] != nil
-			sort_by_date  
+			sort_by_date
     else
 			#show all of the users timetables
       @timetables = Timetable.get_user_timetables(myid)
@@ -38,12 +38,12 @@ class TimetablesController < ApplicationController
 		#flag that indicates whether the user currently on a shift
 		#prevents a user from spamming the clock in button
     @clocked_in = 1
-		
+
 	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
-    #@timetable= Timetable.create!(:time_in=>DateTime.now())	
-	
+    #@timetable= Timetable.create!(:time_in=>DateTime.now())
+
     flash[:notice] = "You have successfully clocked in!"
 		redirect_to timetables_path
   end
@@ -103,8 +103,9 @@ class TimetablesController < ApplicationController
     @id = id
     @profile = Profile.find_by(user_id: id)
     @name = @profile.user.name
+		@email = @profile.user.email
     if params[:timetable] != nil
-			sort_by_date  
+			sort_by_date
     else
 			#show all of the users timetables
       @timetables = Timetable.get_user_timetables(id)
@@ -143,7 +144,7 @@ class TimetablesController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       @timetable = Timetable.find(params[:id])
     end
-		
+
 		#Calculates the total hours and total shifts
 	  def convert_time
       Time.zone = 'Eastern Time (US & Canada)'
@@ -152,7 +153,7 @@ class TimetablesController < ApplicationController
         time_in = x.time_in #Clock in
         all_dates.push(time_in.day)
       end
-      @total_days = all_dates.uniq.length 
+      @total_days = all_dates.uniq.length
 			@total_hours = 0
 			temp = 0
 			@found_clocked = 0
@@ -180,7 +181,7 @@ class TimetablesController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id, :clockout_org )
     end
-  
+
 		#parses through the form to filter the dates
 	  def sort_by_date
       Time.zone = 'Eastern Time (US & Canada)'
@@ -192,7 +193,7 @@ class TimetablesController < ApplicationController
       fromday = params[:timetable]["fromdate(3i)"]
       today = params[:timetable]["todate(3i)"]
       final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
-      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i) 
+      final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i)
       @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
       @fromdate = final_from_date
       @todate  = final_to_date
