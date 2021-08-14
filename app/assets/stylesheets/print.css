@@ -1,5 +1,5 @@
 @media print {
-  div.row, div.printer, div.flash, div.clockinbutton{
+  div.printer, div.flash, div.clockinbutton{
     display: none;
   }
 }

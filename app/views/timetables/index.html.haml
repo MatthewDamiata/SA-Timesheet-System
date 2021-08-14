@@ -96,12 +96,15 @@
           = @weekly_hours[week-1]
         - week += 1
 
-%table#timetables.table.col-md-4.some{:style => "margin-left: 67%; text-align: right;"}
-  %thead
-    %tr
-      %th Total Days: #{@total_days}
-      %th Total Hours: #{@total_hours}
-
+.row
+  %table#timetables.table.col-md-4.some{:style => "margin-left: 15px; max-width: 100px;"}
+    %thead
+      %tr
+        %th Total Days: #{@total_days}
+  %table#timetables.table.col-md-4.some{:style => "margin-left: 32%; max-width: 100px; font-size: 14px;"}
+    %thead
+      %tr
+        %th Total Hours: #{@total_hours}
 .signatures
   %h4
     %br
