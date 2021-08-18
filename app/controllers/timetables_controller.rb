@@ -1,5 +1,7 @@
 require 'date'
 require 'active_support/time'
+require 'socket'
+
 class TimetablesController < ApplicationController
 	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
   Time.zone = 'Eastern Time (US & Canada)'
@@ -16,6 +18,7 @@ class TimetablesController < ApplicationController
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     @admin_user = admins.to_s.include? current_user.email.to_s
+		@machine = Socket.gethostname
     if params[:timetable] != nil
 			sort_by_date
     else
@@ -39,7 +42,7 @@ class TimetablesController < ApplicationController
 		#prevents a user from spamming the clock in button
     @clocked_in = 1
 
-	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
+	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id, machine: Socket.gethostname)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
     #@timetable= Timetable.create!(:time_in=>DateTime.now())

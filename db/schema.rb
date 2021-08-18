@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210724161428) do
+ActiveRecord::Schema.define(version: 20210818175429) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20210724161428) do
     t.text     "clockout_org"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "machine"
   end
 
   create_table "users", force: :cascade do |t|

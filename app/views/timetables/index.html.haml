@@ -2,6 +2,8 @@
   = "#{current_user.name}'s Timesheet"
 %h2#email
   = "#{current_user.email}"
+%h2#machine
+  = "#{@machine}"
 %h4#orgs.some{:style => "line-height: 140%"}
   - if @profile.org != nil
     = "Group/Org#: #{@profile.org}"
@@ -55,6 +57,7 @@
       %th Hours
       %th Notes
       %th Department
+      %th Machine
       %th
       %th
 
@@ -79,6 +82,8 @@
         %td
           = @timetables[i].clockout_org
         %td
+          = @timetables[i].machine
+        %td
           .printer
             - if @timetables[i].time_out != nil
               = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
@@ -97,11 +102,11 @@
         - week += 1
 
 .row
-  %table#timetables.table.col-md-4.some{:style => "margin-left: 15px; max-width: 100px;"}
+  %table#timetables.table.col-md-4.some{:style => "margin-left: 15px; font-size: 14px; max-width: 100px;"}
     %thead
       %tr
         %th Total Days: #{@total_days}
-  %table#timetables.table.col-md-4.some{:style => "margin-left: 32%; max-width: 100px; font-size: 14px;"}
+  %table#timetables.table.col-md-4.some{:style => "margin-left: 26%; max-width: 100px; font-size: 14px;"}
     %thead
       %tr
         %th Total Hours: #{@total_hours}
