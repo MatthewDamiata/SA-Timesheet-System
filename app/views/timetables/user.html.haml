@@ -1,14 +1,15 @@
-= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
+.printer
+  = link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
 %h1#name
   = "#{@name}'s Timesheet"
 %h2#email
   = "#{@email}"
 %h4#orgs.some{:style => "line-height: 140%"}
   - if @profile.org != nil
-    = "Group/Org#: #{@profile.org}"
+    = "Group/Org#: #{@profile.org} #{@orgnamefound1}"
   - if @profile.org2 != nil
     %br
-    = "Additional Group/Org#: #{@profile.org2}"
+    = "Additional Group/Org#: #{@profile.org2} #{@orgnamefound2}"
   - if @profile.grad != nil
     %br
     - if @profile.grad == 0
@@ -25,7 +26,7 @@
   %br
   .printer
     %h6 Date Selector
-    = form_tag timetables_path, method: :get, id: 'dates_form' do
+    = form_tag timetables_user_path, method: :get, id: 'dates_form' do
       = label_tag :fromdate, "From: "
 
       - if @fromdate != nil
@@ -41,6 +42,14 @@
         = date_select "timetable", "todate"
 
       = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
+%br
+
+%h5#begin
+  = "Begin Date: #{@fromdateonly}"
+%h5#end
+  = "End Date: #{@todateonly}"
+%h5#payroll
+  = "Estimated Payday: #{@estimatedpayday}"
 %br
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead

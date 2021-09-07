@@ -5,7 +5,6 @@
       %ul
         - @profile.errors.full_messages.each do |message|
           %li= message
-
   .field
     = f.label "Organization"
     = f.select(:org, Organization.all.collect{|org| [org.num + " " + org.name, org.num]}, {prompt: 'Select an organization'})

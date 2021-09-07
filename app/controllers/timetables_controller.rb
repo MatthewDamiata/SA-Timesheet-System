@@ -18,7 +18,14 @@ class TimetablesController < ApplicationController
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     @admin_user = admins.to_s.include? current_user.email.to_s
-		@machine = Socket.gethostname
+		Organization.all.each do |x|
+			if x.num == @profile.org
+				@orgnamefound1 = x.name
+		  end
+			if x.num == @profile.org2
+				@orgnamefound2 = x.name
+		  end
+		end
     if params[:timetable] != nil
 			sort_by_date
     else
@@ -107,8 +114,16 @@ class TimetablesController < ApplicationController
     @profile = Profile.find_by(user_id: id)
     @name = @profile.user.name
 		@email = @profile.user.email
+		Organization.all.each do |x|
+			if x.num == @profile.org
+				@orgnamefound1 = x.name
+			end
+			if x.num == @profile.org2
+				@orgnamefound2 = x.name
+			end
+		end
     if params[:timetable] != nil
-			sort_by_date
+			sort_by_date_user(id)
     else
 			#show all of the users timetables
       @timetables = Timetable.get_user_timetables(id)
@@ -200,5 +215,29 @@ class TimetablesController < ApplicationController
       @timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
       @fromdate = final_from_date
       @todate  = final_to_date
+			@fromdateonly = final_from_date.strftime("%m/%d/%y")
+			@todateonly = final_to_date.strftime("%m/%d/%y")
+			@estimatedpayday = @todate + 11.day
+			@estimatedpayday = @estimatedpayday.strftime("%m/%d/%y")
+		end
+
+		def sort_by_date_user(id)
+			Time.zone = 'Eastern Time (US & Canada)'
+			myid = id
+			fromyear = params[:timetable]["fromdate(1i)"]
+			toyear = params[:timetable]["todate(1i)"]
+			frommonth = params[:timetable]["fromdate(2i)"]
+			tomonth = params[:timetable]["todate(2i)"]
+			fromday = params[:timetable]["fromdate(3i)"]
+			today = params[:timetable]["todate(3i)"]
+			final_from_date = DateTime.new(fromyear.to_i, frommonth.to_i, fromday.to_i)
+			final_to_date = DateTime.new(toyear.to_i, tomonth.to_i, today.to_i)
+			@timetables = Timetable.filter_dates(final_from_date,final_to_date,myid)
+			@fromdate = final_from_date
+			@todate  = final_to_date
+			@fromdateonly = final_from_date.strftime("%m/%d/%y")
+			@todateonly = final_to_date.strftime("%m/%d/%y")
+			@estimatedpayday = @todate + 11.day
+			@estimatedpayday = @estimatedpayday.strftime("%m/%d/%y")
 		end
 end

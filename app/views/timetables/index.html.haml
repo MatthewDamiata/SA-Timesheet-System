@@ -2,14 +2,12 @@
   = "#{current_user.name}'s Timesheet"
 %h2#email
   = "#{current_user.email}"
-%h2#machine
-  = "#{@machine}"
 %h4#orgs.some{:style => "line-height: 140%"}
   - if @profile.org != nil
-    = "Group/Org#: #{@profile.org}"
+    = "Group/Org#: #{@profile.org} #{@orgnamefound1}"
   - if @profile.org2 != nil
     %br
-    = "Additional Group/Org#: #{@profile.org2}"
+    = "Additional Group/Org#: #{@profile.org2} #{@orgnamefound2}"
   - if @profile.grad != nil
     %br
     - if @profile.grad == 0
@@ -23,6 +21,10 @@
   To find the payroll calendar dates, look
   = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
   %br
+  %br
+  .printer
+    %b
+      Please enter the proper pay period and refresh to print your timesheet.
   %br
   .printer
     %h6 Date Selector
@@ -48,6 +50,13 @@
   - if @found_clocked == 0
     = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
 
+%h5#begin
+  = "Begin Date: #{@fromdateonly}"
+%h5#end
+  = "End Date: #{@todateonly}"
+%h5#payroll
+  = "Estimated Payday: #{@estimatedpayday}"
+%br
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
     %tr
