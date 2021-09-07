@@ -148,6 +148,21 @@ class TimetablesController < ApplicationController
     setupOrgs
   end
 
+	def user_new
+		p "hey"
+		Time.zone = 'Eastern Time (US & Canada)'
+		#flag that indicates whether the user currently on a shift
+		#prevents a user from spamming the clock in button
+		id = params[:id]
+		@timetable = Timetable.create!(time_in: DateTime.now(), user_id: id)
+
+		#@clicked = true #true=>if clicked, disable button, false=>enable button
+		#@timetable= Timetable.create!(:time_in=>DateTime.now())
+
+		flash[:notice] = "You have successfully clocked in!"
+		redirect_to timetables_user_path
+	end
+
   # DELETE /timetables/admin/1
   def user_destroy
     Time.zone = 'Eastern Time (US & Canada)'

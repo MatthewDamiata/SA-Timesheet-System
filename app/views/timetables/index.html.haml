@@ -49,13 +49,13 @@
 .clockinbutton.some{:style => "margin-bottom: 20px;"}
   - if @found_clocked == 0
     = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
-
-%h5#begin
-  = "Begin Date: #{@fromdateonly}"
-%h5#end
-  = "End Date: #{@todateonly}"
-%h5#payroll
-  = "Estimated Payday: #{@estimatedpayday}"
+.signatures
+  %h5#begin
+    = "Begin Date: #{@fromdateonly}"
+  %h5#end
+    = "End Date: #{@todateonly}"
+  %h5#payroll
+    = "Estimated Payday: #{@estimatedpayday}"
 %br
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
