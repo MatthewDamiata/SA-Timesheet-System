@@ -5,7 +5,14 @@
   %b Second Organization:
   = @profile.org2
 %p
+  %b Main Machine:
+  = @profile.machine_1
+%p
+  %b Alternate Machine:
+  = @profile.machine_2
+%p
   %b Grad:
   = @profile.grad
+
 = link_to 'Edit', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
 = link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'

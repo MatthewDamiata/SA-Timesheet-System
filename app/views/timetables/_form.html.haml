@@ -13,10 +13,13 @@
     .field
       = f.label :end
       = f.text_field :time_out
-  
+
   .field
     = f.label "Organization:"
     = f.select(:clockout_org, @selectedOrgs, {prompt: 'Select an organization'})
+  .field
+    = f.label "Machine"
+    = f.select(:machine, @selectedMachines, {prompt: 'Select a machine'})
   .field
     = f.label :notes
     = f.text_field :notes

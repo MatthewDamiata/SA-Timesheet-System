@@ -11,6 +11,7 @@ class TimetablesController < ApplicationController
 
   def setupOrgs
     @selectedOrgs = Array[@profile.org, @profile.org2]
+		@selectedMachines = Array[@profile.machine_1, @profile.machine_2]
   end
 
   def index
@@ -49,7 +50,7 @@ class TimetablesController < ApplicationController
 		#prevents a user from spamming the clock in button
     @clocked_in = 1
 
-	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id, machine: Socket.gethostname)
+	  @timetable= Timetable.create!(time_in: DateTime.now(), user_id: current_user.id)
 
 	  #@clicked = true #true=>if clicked, disable button, false=>enable button
     #@timetable= Timetable.create!(:time_in=>DateTime.now())
@@ -197,7 +198,7 @@ class TimetablesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def timetable_params
       Time.zone = 'Eastern Time (US & Canada)'
-      params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id, :clockout_org )
+      params.require(:timetable).permit(:time_in, :time_out,:notes, :user_id, :clockout_org, :machine)
     end
 
 		#parses through the form to filter the dates

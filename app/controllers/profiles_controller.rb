@@ -53,6 +53,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
-      params.require(:profile).permit(:privilege, :org, :org2, :grad, :manager_id, :user_id)
+      params.require(:profile).permit(:privilege, :org, :org2, :grad, :manager_id, :user_id, :machine_1, :machine_2)
     end
 end
