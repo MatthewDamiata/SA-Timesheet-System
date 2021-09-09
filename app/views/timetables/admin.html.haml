@@ -1,10 +1,11 @@
 = form_tag "admin/manager" do
-    %h1= "Organization Management"
-    - for i in 0..@allOrgs.length()-1 do
-        %div
-            = label_tag "organization[][manager]", @allOrgs[i]
-            = select_tag "organization[][manager]", options_for_select(@users), prompt: "Select a manager"
-    = submit_tag 'Save', :class => 'btn bg-dark text-light white'
+    - if !@manager_user
+        %h1= "Organization Management"
+        - for i in 0..@allOrgs.length()-1 do
+            %div
+                = label_tag "organization[][manager]", @allOrgs[i]
+                = select_tag "organization[][manager]", options_for_select(@users), prompt: "Select a manager"
+        = submit_tag 'Save', :class => 'btn bg-dark text-light white'
 
     %h1= "User Timesheets"
     - for i in 0..@profiles.length()-1 do

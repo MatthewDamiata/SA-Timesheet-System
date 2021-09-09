@@ -19,12 +19,7 @@ class TimetablesController < ApplicationController
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     @admin_user = admins.to_s.include? current_user.email.to_s
-    
-    @managers = Organization.all.collect{|org| org.manager}
-    myid = current_user.id
-    @manager_prof = Profile.find_by(user_id: myid)
-    @manager_user = @managers.include? current_user.name
-
+    manager_user
 		Organization.all.each do |x|
 			if x.num == @profile.org
 				@orgnamefound1 = x.name
