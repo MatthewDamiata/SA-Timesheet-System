@@ -19,6 +19,12 @@ class TimetablesController < ApplicationController
     myid = current_user.id
     @profile = Profile.find_by(user_id: myid)
     @admin_user = admins.to_s.include? current_user.email.to_s
+    
+    @managers = Organization.all.collect{|org| org.manager}
+    myid = current_user.id
+    @manager_prof = Profile.find_by(user_id: myid)
+    @manager_user = @managers.include? current_user.name
+
 		Organization.all.each do |x|
 			if x.num == @profile.org
 				@orgnamefound1 = x.name
@@ -103,7 +109,32 @@ class TimetablesController < ApplicationController
   # GET /timetables/admin
   def admin
     Time.zone = 'Eastern Time (US & Canada)'
-    @profile = Profile.all.collect{|prof| [prof.user]}
+    @profiles = Profile.all.collect{|prof| prof}
+    @users = Array.new
+    Profile.all.each do |x|
+      if !(x.user.nil?)
+        @users.push(x.user.name)
+      end
+    end
+    @allOrgs = Organization.all.collect{|org| org.name}
+    manager_user
+  end
+
+  def manager_user
+    @managers = Array.new
+    if (!(params[:organization].nil?) || Organization.all.collect{|org| org.manager}.any?)
+      if(!(params[:organization].nil?))
+        Organization.all.each do |x|
+          x.update(manager: params[:organization][0][:manager])
+          @managers.push(x.manager, x.num)
+        end
+      else
+        @managers = Organization.all.collect{|org| org.manager}
+      end
+      myid = current_user.id
+      @manager_prof = Profile.find_by(user_id: myid)
+      @manager_user = @managers.include? current_user.name
+    end
   end
 
   # GET /timetables/admin/1
