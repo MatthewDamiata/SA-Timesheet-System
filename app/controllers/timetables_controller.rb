@@ -116,20 +116,19 @@ class TimetablesController < ApplicationController
   end
 
   def manager_user
-    @managers = Array.new
-    if (!(params[:organization].nil?) || Organization.all.collect{|org| org.manager}.any?)
-      if(!(params[:organization].nil?))
-        Organization.all.each do |x|
-          x.update(manager: params[:organization][0][:manager])
-          @managers.push(x.manager, x.num)
+    if(!(params[:organization].nil?))
+      i = 0;
+      Organization.all.each do |x|
+        if(!(params[:organization][i][:manager].blank?))
+          x.update(manager: params[:organization][i][:manager])
         end
-      else
-        @managers = Organization.all.collect{|org| org.manager}
+        i = i + 1
       end
-      myid = current_user.id
-      @manager_prof = Profile.find_by(user_id: myid)
-      @manager_user = @managers.include? current_user.name
     end
+    @managers = Organization.all.collect{|org| org.manager}
+    myid = current_user.id
+    @manager_prof = Profile.find_by(user_id: myid)
+    @manager_user = @managers.include? current_user.name
   end
 
   # GET /timetables/admin/1

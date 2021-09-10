@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   root 'timesheets#landing'
 
   match 'timetables/admin', :as => 'timetables_admin', :via => [:get, :post]
-  match 'timetables/admin/:manager', :to => 'timetables#admin', :via => [:get, :post]
   match 'timetables/admin/:id', :as => 'timetables_user', :to => 'timetables#user', :via => [:get, :post]
   delete 'timetables/admin/:id/:table_id', :to => 'timetables#user_destroy'
   match 'timetables/admin/:id/:table_id', :as => 'timetables_user_edit', :to => 'timetables#user_edit', :via => [:get, :post]

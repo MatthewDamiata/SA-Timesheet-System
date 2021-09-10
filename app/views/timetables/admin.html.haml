@@ -1,9 +1,12 @@
-= form_tag "admin/manager" do
+= form_tag do
     - if !@manager_user
         %h1= "Organization Management"
         - for i in 0..@allOrgs.length()-1 do
             %div
-                = label_tag "organization[][manager]", @allOrgs[i]
+                -if (@managers.any? && !(@managers[i].blank?)) #Checks for nil & empty strings
+                    = label_tag "organization[][manager]", @allOrgs[i] + " Manager: " + @managers[i]
+                -else
+                    = label_tag "organization[][manager]", @allOrgs[i] + " Manager: N/A"
                 = select_tag "organization[][manager]", options_for_select(@users), prompt: "Select a manager"
         = submit_tag 'Save', :class => 'btn bg-dark text-light white'
 
