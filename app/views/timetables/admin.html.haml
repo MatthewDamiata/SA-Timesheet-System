@@ -1,5 +1,5 @@
 = form_tag do
-    - if !@manager_user
+    - if !@manager_user or @admin_user
         %h1= "Organization Management"
         - for i in 0..@allOrgs.length()-1 do
             %div
@@ -13,10 +13,10 @@
     %h1= "User Timesheets"
     - for i in 0..@profiles.length()-1 do
         - if !(@profiles[i].user_id.nil?)
-            - if @manager_user
-                - if (@profiles[i].org == @manager_prof.org || @profiles[i].org2 == @manager_prof.org || @profiles[i].org == @manager_prof.org2 || @profiles[i].org2 == @manager_prof.org2)
+            - if @manager_user and !@admin_user
+                - if (@profiles[i].org == @manager_prof.org or @profiles[i].org2 == @manager_prof.org or @profiles[i].org == @manager_prof.org2 or @profiles[i].org2 == @manager_prof.org2)
                     %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)
             - else
                 %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)
-                
+
 = link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'

@@ -67,6 +67,7 @@ class TimetablesController < ApplicationController
     @profile = Profile.find_by(user_id: myid)
 		@timetable = Timetable.find(params[:id])
     @admin_user = admins.to_s.include? current_user.email.to_s
+		manager_user
 		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now())
       @clocked_in = 0
@@ -104,6 +105,7 @@ class TimetablesController < ApplicationController
   # GET /timetables/admin
   def admin
     Time.zone = 'Eastern Time (US & Canada)'
+		@admin_user = admins.to_s.include? current_user.email.to_s
     @profiles = Profile.all.collect{|prof| prof}
     @users = Array.new
     Profile.all.each do |x|
@@ -165,6 +167,7 @@ class TimetablesController < ApplicationController
     @profile = Profile.find_by(user_id: id)
 		@timetable = Timetable.find(params[:table_id])
     @admin_user = admins.to_s.include? current_user.email.to_s
+		manager_user
 		if @timetable.time_out == nil
 			@timetable.update(time_out: DateTime.now())
       @clocked_in = 0

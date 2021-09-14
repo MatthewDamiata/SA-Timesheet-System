@@ -25,8 +25,9 @@
   %br
   %br
   .printer
-    %b
-      Please enter the proper pay period and refresh to print your timesheet.
+    %mark
+      %b
+        Please enter the proper pay period and click "Refresh" to print your timesheet.
   %br
   .printer
     %h6 Date Selector
@@ -47,13 +48,12 @@
 
       = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
 %br
-.signatures
-  %h5#begin
-    = "Begin Date: #{@fromdateonly}"
-  %h5#end
-    = "End Date: #{@todateonly}"
-  %h5#payroll
-    = "Estimated Payday: #{@estimatedpayday}"
+%h5#begin
+  = "Begin Date: #{@fromdateonly}"
+%h5#end
+  = "End Date: #{@todateonly}"
+%h5#payroll
+  = "Estimated Payday: #{@estimatedpayday}"
 
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead

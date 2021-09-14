@@ -5,7 +5,7 @@
       %ul
         - @timetable.errors.full_messages.each do |message|
           %li= message
-  - if @admin_user
+  - if @admin_user or @manager_user
     .field
       = f.label :start
       = f.text_field :time_in

@@ -23,8 +23,9 @@
   %br
   %br
   .printer
-    %b
-      Please enter the proper pay period and refresh to print your timesheet.
+    %mark
+      %b
+        Please enter the proper pay period and click "Refresh" to print your timesheet.
   %br
   .printer
     %h6 Date Selector
@@ -49,13 +50,12 @@
 .clockinbutton.some{:style => "margin-bottom: 20px;"}
   - if @found_clocked == 0
     = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
-.signatures
-  %h5#begin
-    = "Begin Date: #{@fromdateonly}"
-  %h5#end
-    = "End Date: #{@todateonly}"
-  %h5#payroll
-    = "Estimated Payday: #{@estimatedpayday}"
+%h5#begin
+  = "Begin Date: #{@fromdateonly}"
+%h5#end
+  = "End Date: #{@todateonly}"
+%h5#payroll
+  = "Estimated Payday: #{@estimatedpayday}"
 %br
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
