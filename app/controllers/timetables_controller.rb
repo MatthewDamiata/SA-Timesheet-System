@@ -32,7 +32,7 @@ class TimetablesController < ApplicationController
 			sort_by_date
     else
 			#show all of the users timetables
-      @timetables = Timetable.get_user_timetables(myid)
+      @timetables = Timetable.get_user_timetables(myid).where('created_at >= ?', 2.week.ago)
     end
 		convert_time
   end
@@ -154,7 +154,7 @@ class TimetablesController < ApplicationController
 			sort_by_date_user(id)
     else
 			#show all of the users timetables
-      @timetables = Timetable.get_user_timetables(id)
+      @timetables = Timetable.get_user_timetables(id).where('created_at >= ?', 2.week.ago)
     end
 		convert_time
   end
