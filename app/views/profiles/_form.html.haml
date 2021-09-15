@@ -12,7 +12,6 @@
     .field
       = f.label "Organization 2"
       = f.select(:org2, Organization.all.collect{|org| [org.num + " " + org.name, org.num]}, {prompt: 'Select an organization'})
-
   .field
     = f.label "Main Machine"
     = f.text_field :machine_1

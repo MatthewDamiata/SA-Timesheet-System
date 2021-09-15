@@ -142,7 +142,6 @@ class TimetablesController < ApplicationController
 		Organization.all.each do |x|
 			@manager_orgs[x.num] = Organization.find_by(num: x.num).manager
 		end
-		p @manager_orgs
     @managers = Organization.all.collect{|org| org.manager}
     myid = current_user.id
     @manager_prof = Profile.find_by(user_id: myid)
@@ -193,7 +192,6 @@ class TimetablesController < ApplicationController
   end
 
 	def user_new
-		p "hey"
 		Time.zone = 'Eastern Time (US & Canada)'
 		#flag that indicates whether the user currently on a shift
 		#prevents a user from spamming the clock in button
