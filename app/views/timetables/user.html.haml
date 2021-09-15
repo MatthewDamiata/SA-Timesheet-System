@@ -62,9 +62,9 @@
       %th Time In
       %th Time Out
       %th Hours
-      %th Notes
       %th Department
       %th Machine
+      %th Notes
       %th
       %th
 
@@ -85,11 +85,11 @@
           - if @timetables[i].time_out != nil && @timetables[i].time_in != nil
             = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
         %td
-          = @timetables[i].notes
-        %td
           = @timetables[i].clockout_org
         %td
           = @timetables[i].machine
+        %td
+          = @timetables[i].notes
         %td
           .printer
             - if @timetables[i].time_out != nil
@@ -101,7 +101,7 @@
       - if i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W"))
         %td
         %td
-        %th Total Week #{week}
+        %th Week #{week}
         %td
           = @weekly_hours[week-1]
         - week += 1

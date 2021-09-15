@@ -32,7 +32,7 @@ class TimetablesController < ApplicationController
 			sort_by_date
     else
 			#show all of the users timetables
-      @timetables = Timetable.get_user_timetables(myid).where('created_at >= ?', 2.week.ago)
+      @timetables = Timetable.get_user_timetables(myid).where('created_at >= ?', 4.week.ago)
     end
 		convert_time
   end
@@ -138,6 +138,11 @@ class TimetablesController < ApplicationController
         i = i + 1
       end
     end
+		@manager_orgs = Hash.new
+		Organization.all.each do |x|
+			@manager_orgs[x.num] = Organization.find_by(num: x.num).manager
+		end
+		p @manager_orgs
     @managers = Organization.all.collect{|org| org.manager}
     myid = current_user.id
     @manager_prof = Profile.find_by(user_id: myid)
@@ -165,7 +170,7 @@ class TimetablesController < ApplicationController
 			sort_by_date_user(id)
     else
 			#show all of the users timetables
-      @timetables = Timetable.get_user_timetables(id).where('created_at >= ?', 2.week.ago)
+      @timetables = Timetable.get_user_timetables(id).where('created_at >= ?', 4.week.ago)
     end
 		convert_time
   end

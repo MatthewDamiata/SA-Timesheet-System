@@ -4,9 +4,9 @@
         - for i in 0..@allOrgs.length()-1 do
             %div
                 -if (@managers.any? && !(@managers[i].blank?)) #Checks for nil & empty strings
-                    = label_tag "organization[][manager]", @allOrgs[i] + " Manager: " + @managers[i]
+                    = label_tag "organization[][manager]", @allOrgs[i] + " - " + @managers[i]
                 -else
-                    = label_tag "organization[][manager]", @allOrgs[i] + " Manager: N/A"
+                    = label_tag "organization[][manager]", @allOrgs[i] + " - N/A"
                 = select_tag "organization[][manager]", options_for_select(@users), prompt: "Select a manager"
         = submit_tag 'Save', :class => 'btn bg-dark text-light white'
 
@@ -14,7 +14,7 @@
     - for i in 0..@profiles.length()-1 do
         - if !(@profiles[i].user_id.nil?)
             - if @manager_user and !@admin_user
-                - if ( (@profiles[i].org == @manager_prof.org and @profiles[i].org != "" and @manager_prof.org != "") or (@profiles[i].org2 == @manager_prof.org and @profiles[i].org2 != "" and @manager_prof.org != ""))
+                - if ( (@profiles[i].org == @manager_prof.org and @profiles[i].org != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org and @profiles[i].org2 != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org == @manager_prof.org2 and @profiles[i].org != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org2 and @profiles[i].org2 != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name))
                     %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)
             - else
                 %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)

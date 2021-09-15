@@ -17,6 +17,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    @admin_user = admins.to_s.include? current_user.email.to_s
   end
 
   # POST /profiles
