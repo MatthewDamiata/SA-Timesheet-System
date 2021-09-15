@@ -106,7 +106,18 @@ class TimetablesController < ApplicationController
   def admin
     Time.zone = 'Eastern Time (US & Canada)'
 		@admin_user = admins.to_s.include? current_user.email.to_s
-    @profiles = Profile.all.collect{|prof| prof}
+    @profiles = (Profile.all.collect{|prof| prof})
+		non_nil = Array.new
+		is_nil = Array.new
+		@profiles.each do |prof|
+			if !(prof.user.nil?)
+        non_nil.push(prof)
+			else
+				is_nil.push(prof)
+			end
+	  end
+		non_nil = non_nil.sort_by { |prof| prof.user.name.split(' ').last }
+		@profiles = non_nil + is_nil
     @users = Array.new
     Profile.all.each do |x|
       if !(x.user.nil?)
