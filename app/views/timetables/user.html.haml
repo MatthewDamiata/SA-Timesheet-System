@@ -17,19 +17,13 @@
     - else
       = "Graduate Student: Yes"
 .printer
-  = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
-%br
-.printer
-  To find the payroll calendar dates, look
-  = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
   %br
-  %br
+    = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
+    = link_to "Tutorial", "https://docs.google.com/document/d/1okytR5K9YzO0yVjNTVR1zimIgcDAC6dEYu2vx6GkT-w/edit", target: :_blank, class: 'btn btn-light bg-success text-light white'
+    = link_to "Payroll Calendar", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view", target: :_blank, class: 'btn btn-light bg-success text-light white'
+    %br
   .printer
-    %mark
-      %b
-        Please enter the proper pay period and click "Refresh" to print your timesheet.
-  %br
-  .printer
+    %br
     %h6 Date Selector
     = form_tag timetables_user_path, method: :get, id: 'dates_form' do
       = label_tag :fromdate, "From: "
@@ -54,7 +48,7 @@
   = "End Date: #{@todateonly}"
 %h5#payroll
   = "Estimated Payday: #{@estimatedpayday}"
-
+%br
 %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
   %thead
     %tr

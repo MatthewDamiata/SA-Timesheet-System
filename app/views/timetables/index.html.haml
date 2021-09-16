@@ -15,20 +15,21 @@
     - else
       = "Graduate Student: Yes"
 .printer
-  = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
-%br
-.printer
-  To find the payroll calendar dates, look
-  = link_to "here.", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view"
+  %br
+    - if @found_clocked == 0
+      = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
+    = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
+    = link_to "Tutorial", "https://docs.google.com/document/d/1okytR5K9YzO0yVjNTVR1zimIgcDAC6dEYu2vx6GkT-w/edit", target: :_blank, class: 'btn btn-light bg-success text-light white'
+    = link_to "Payroll Calendar", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view", target: :_blank, class: 'btn btn-light bg-success text-light white'
   %br
   %br
   .printer
-    %mark
-      %b
-        Please enter the proper pay period and click "Refresh" to print your timesheet.
-  %br
-  .printer
-    %h6 Date Selector
+    %h6
+      %mark
+        Please enter the proper pay period and click
+        %b
+          Refresh
+        to print your timesheet.
     = form_tag timetables_path, method: :get, id: 'dates_form' do
       = label_tag :fromdate, "From: "
 
@@ -47,9 +48,6 @@
       = submit_tag 'Refresh', id: 'dates_submit', class: 'btn btn-light bg-dark text-light white'
 
 %br
-.clockinbutton.some{:style => "margin-bottom: 20px;"}
-  - if @found_clocked == 0
-    = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
 %h5#begin
   = "Begin Date: #{@fromdateonly}"
 %h5#end
@@ -132,5 +130,5 @@
     %br
     %br
     Manager Signature:_____________________________ Date:___________________
-.printer.some{:style => "margin-left: 89%;"}
+.printer.some{:style => "margin-left: 89%"}
   = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
