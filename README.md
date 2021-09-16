@@ -1,8 +1,10 @@
 # SA Timesheet System
 ## CS445 - Software Engineering
-### Matthew Damiata, Korhan Citlak, Ethan Breban, Benjamin Keurian, Joshua Szachar
+### Matthew Damiata, Dyandra Allen, Korhan Citlak, Ethan Breban, Benjamin Keurian, Joshua Szachar
 
 The current timesheet system that the SA uses has many faults in their UI, permissions, ease of use, and has an inability for users to edit previous responses (adding hours). Our goal is to create a new timesheet system without the previous faults for SA workers to clock in and clock out their hours to get paid accurately.
+
+[Tutorial](https://docs.google.com/document/d/1okytR5K9YzO0yVjNTVR1zimIgcDAC6dEYu2vx6GkT-w/edit) on how to operate the timesheet.
 
 ### Development Build
 1. Clone the repo
