@@ -2,6 +2,7 @@
   = "#{current_user.name}'s Timesheet"
 %h2#email
   = "#{current_user.email}"
+%br
 %h4#orgs.some{:style => "line-height: 140%"}
   - if @profile.org != nil
     = "Group/Org#: #{@profile.org} #{@orgnamefound1}"
@@ -19,14 +20,14 @@
     - if @found_clocked == 0
       = link_to 'Clock In', new_timetable_path, class: 'btn btn-light bg-primary text-light white'
     = link_to 'Profile Settings', edit_profile_path(@profile), class: 'btn btn-light bg-dark text-light white'
-    = link_to "Tutorial", "https://docs.google.com/document/d/1okytR5K9YzO0yVjNTVR1zimIgcDAC6dEYu2vx6GkT-w/edit", target: :_blank, class: 'btn btn-light bg-success text-light white'
+    = link_to "Guide", "https://docs.google.com/document/d/1okytR5K9YzO0yVjNTVR1zimIgcDAC6dEYu2vx6GkT-w/edit", target: :_blank, class: 'btn btn-light bg-success text-light white'
     = link_to "Payroll Calendar", "https://drive.google.com/file/d/17FbqNZ2WGDTR2LiZu4XNgQOiMNJSChH1/view", target: :_blank, class: 'btn btn-light bg-success text-light white'
   %br
   %br
   .printer
     %h6
       %mark
-        Please enter the proper pay period and click
+        Enter the proper pay period and click
         %b
           Refresh
         to print your timesheet.
@@ -55,68 +56,75 @@
 %h5#payroll
   = "Estimated Payday: #{@estimatedpayday}"
 %br
-%table#timetables.table.table-striped.col-md-12.some{:style => "text-align: left"}
-  %thead
-    %tr
-      %th Day
-      %th Time In
-      %th Time Out
-      %th Hours
-      %th Department
-      %th Machine
-      %th Notes
-      %th
-      %th
-
-  %tbody
-    - week = 1
-    - for i in 0..@timetables.length()-1 do
-      %tr
-        %td
-          - if @timetables[i].time_in != nil
-            = @timetables[i].time_in.strftime("%m/%d/%Y")
-        %td
-          - if @timetables[i].time_in != nil
-            = @timetables[i].time_in.strftime("%l:%M %p")
-        %td
-          - if @timetables[i].time_out != nil
-            = @timetables[i].time_out.strftime("%l:%M %p")
-        %td
-          - if @timetables[i].time_out != nil && @timetables[i].time_in != nil
-            = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
-        %td
-          = @timetables[i].clockout_org
-        %td
-          = @timetables[i].machine
-        %td
-          = @timetables[i].notes
-        %td
-          .printer
-            - if @timetables[i].time_out != nil
-              = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
-        %td
-          .printer
-            - if @timetables[i].time_out != nil
-              = link_to 'Delete', timetable_path(@timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
-            - else
-              = link_to 'Clock Out', edit_timetable_path(@timetables[i]),class: 'btn btn-light bg-dark text-light white'
-      - if (@timetables[i].time_out != nil && @timetables[i].time_in != nil) && (i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W")))
-        %td
-        %td
-        %th Week #{week}
-        %td
-          = @weekly_hours[week-1]
-        - week += 1
-
-.row
-  %table#timetables.table.col-md-4.some{:style => "margin-left: 15px; max-width: 150px;"}
+.table-responsive
+  %table#timetables.table.table-striped.col-md-12.some{:style => "text-align: center"}
     %thead
+      %tr
+        %th Day
+        %th Time In
+        %th Time Out
+        %th Hours
+        %th Department
+        %th Machine
+        %th Notes
+        %th
+        %th
+
+    %tbody
+      - week = 1
+      - for i in 0..@timetables.length()-1 do
+        %tr
+          %td
+            - if @timetables[i].time_in != nil
+              = @timetables[i].time_in.strftime("%m/%d/%Y")
+          %td
+            - if @timetables[i].time_in != nil
+              = @timetables[i].time_in.strftime("%l:%M %p")
+          %td
+            - if @timetables[i].time_out != nil
+              = @timetables[i].time_out.strftime("%l:%M %p")
+          %td
+            - if @timetables[i].time_out != nil && @timetables[i].time_in != nil
+              = (((((@timetables[i].time_out.to_time - @timetables[i].time_in.to_time) / 3600)*4).round())/4.0).round(2)
+          %td
+            = @timetables[i].clockout_org
+          %td
+            = @timetables[i].machine
+          %td
+            = @timetables[i].notes
+          %td
+            .printer
+              - if @timetables[i].time_out != nil
+                = link_to "Edit", edit_timetable_path(@timetables[i]), class: 'btn btn-primary text-light white'
+          %td
+            .printer
+              - if @timetables[i].time_out != nil
+                = link_to 'Delete', timetable_path(@timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
+              - else
+                = link_to 'Clock Out', edit_timetable_path(@timetables[i]),class: 'btn btn-light bg-dark text-light white'
+        - if (@timetables[i].time_out != nil && @timetables[i].time_in != nil) && (i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W")))
+          %td
+          %td
+          %th Week #{week}
+          %td
+            = @weekly_hours[week-1]
+          - week += 1
+          %td
+          %td
+          %td
+          %td
+          %td
       %tr
         %th Total Days: #{@total_days}
-  %table#timetables.table.col-md-4.some{:style => "margin-left: 180px; max-width: 160px;"}
-    %thead
-      %tr
+        %th
+        %th
         %th Total Hours: #{@total_hours}
+        %th
+        %th
+        %th
+        %th
+        %th
+
 .signatures
   %h4
     %br
@@ -130,5 +138,5 @@
     %br
     %br
     Manager Signature:_____________________________ Date:___________________
-.printer.some{:style => "margin-left: 89%"}
-  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white'
+.printer
+  = link_to 'Print Timesheet', '/timetables', :onclick => 'window.print();return false;',class: 'btn btn-light bg-dark text-light white', style: "float: right;"

@@ -30,6 +30,11 @@
     margin: 0px 0px 50px 15px;
 }
 
+.row_without_padding {
+    margin-right: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
 .navbar form {
   display: inline;
 }
@@ -46,6 +51,13 @@
 }
 
 .table td {
+  border-top: 1px solid #000!important;
+  border-bottom: 1px solid #000!important;
+  border-left: 1px solid #000!important;
+  border-right: 1px solid #000!important;
+}
+
+.table th {
   border-top: 1px solid #000!important;
   border-bottom: 1px solid #000!important;
   border-left: 1px solid #000!important;

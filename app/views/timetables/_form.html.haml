@@ -24,4 +24,6 @@
     = f.label :notes
     = f.text_field :notes
   .actions
-    = f.submit 'Save', :class => 'btn bg-dark text-light white'
+    .row_without_padding
+      = f.submit 'Save', :class => 'btn bg-dark text-light white'
+      = link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
