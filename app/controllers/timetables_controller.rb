@@ -180,7 +180,7 @@ class TimetablesController < ApplicationController
     Time.zone = 'Eastern Time (US & Canada)'
     id = params[:id]
     @profile = Profile.find_by(user_id: id)
-		@timetable = Timetable.find(params[:table_id])
+    @timetable = Timetable.find(params[:table_id])
     @admin_user = admins.to_s.include? current_user.email.to_s
 		manager_user
 		if @timetable.time_out == nil
@@ -191,15 +191,13 @@ class TimetablesController < ApplicationController
     setupOrgs
   end
 
+  # GET /timetables/admin/1/new
 	def user_new
 		Time.zone = 'Eastern Time (US & Canada)'
 		#flag that indicates whether the user currently on a shift
 		#prevents a user from spamming the clock in button
 		id = params[:id]
 		@timetable = Timetable.create!(time_in: DateTime.now(), user_id: id)
-
-		#@clicked = true #true=>if clicked, disable button, false=>enable button
-		#@timetable= Timetable.create!(:time_in=>DateTime.now())
 
 		flash[:notice] = "You have successfully clocked in!"
 		redirect_to timetables_user_path
