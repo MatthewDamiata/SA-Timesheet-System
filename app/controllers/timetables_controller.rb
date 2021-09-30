@@ -178,8 +178,8 @@ class TimetablesController < ApplicationController
   #Note: Exclusively used for admin viewing other timesheets
   def user_edit
     Time.zone = 'Eastern Time (US & Canada)'
-    id = params[:id]
-    @profile = Profile.find_by(user_id: id)
+    @user_id = params[:id]
+    @profile = Profile.find_by(user_id: @user_id)
     @timetable = Timetable.find(params[:table_id])
     @admin_user = admins.to_s.include? current_user.email.to_s
 		manager_user

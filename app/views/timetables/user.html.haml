@@ -95,7 +95,7 @@
           %td
             .printer
               - if @timetables[i].time_out != nil
-                = link_to 'Delete', timetables_user_path(@id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
+                = link_to 'Delete', timetables_user_edit_path(@id.to_s, @timetables[i]), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger'
               - else
                 = link_to 'Clock Out', timetables_user_edit_path(@id, @timetables[i]),class: 'btn btn-light bg-dark text-light white'
         - if i == @timetables.length()-1 || (@timetables[i].time_in.strftime("%W") != @timetables[i+1].time_in.strftime("%W"))
