@@ -244,20 +244,44 @@ class TimetablesController < ApplicationController
       end
     end
 
-    # Gets list of archived usrs
+    # Gets list of archived users
     @archived_users = Array.new
-    file = CSV.read('db/archived_users.csv')
+    file = CSV.read('db/archived_users.csv', converters: :all)
     file.each do |row|
       @archived_users.push(row[0])
     end
 
-    # Addes user to archived users
-    if(!(params[:archive_user].nil?) and !(@archived_users.include?(params[:archive_user])))
+    # Gets list of archived user names
+    @archived_users_names = Array.new
+    @users.each do |x|
+      if (@archived_users.include? x[1])
+        @archived_users_names.push(x)
+      end
+    end
+
+    # Adds user to archived users
+    if(!(params[:archive_user].nil?) and !(@archived_users.include?(params[:archive_user].to_i)))
       archive_user = params[:archive_user]
       CSV.open("db/archived_users.csv", "a+") do |csv|
         csv << [archive_user]
       end
     end
+
+    # Removes user from archived users
+    if(!(params[:unarchive_user].nil?))
+      @archived_users_names.each do |x|
+        if(x.include?(params[:unarchive_user].to_i))
+          unarchive_user = params[:unarchive_user].to_i
+          file.delete_if do |row|
+            row[0] == unarchive_user
+          end
+          CSV.open("db/archived_users.csv", "w") do |csv|
+            csv << file
+          end
+        end
+      end
+    end
+
     manager_user
   end
 
