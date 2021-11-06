@@ -112,7 +112,7 @@ class TimetablesController < ApplicationController
 
     # Gets list of archived users
     @archived_users = Array.new
-    file = CSV.read('db/archived_users.csv')
+    file = CSV.read('db/archived_users.csv', converters: :all)
     file.each do |row|
       @archived_users.push(row[0])
     end
@@ -133,7 +133,7 @@ class TimetablesController < ApplicationController
     @users = Array.new
     Profile.all.each do |x|
       if !(x.user.nil?)
-        if !(@archived_users.include? x.user.name)
+        if !(@archived_users.include? x.user.id)
           @users.push(x.user.name)
         end
       end
@@ -236,23 +236,11 @@ class TimetablesController < ApplicationController
     # Checks if current user is an admin
     @admin_user = admins.to_s.include? current_user.email.to_s
 
-    # Gets list of user profiles & users' names
-    @profiles = (Profile.all.collect{|prof| prof})
-		non_nil = Array.new
-		is_nil = Array.new
-		@profiles.each do |prof|
-			if !(prof.user.nil?)
-        non_nil.push(prof)
-			else
-				is_nil.push(prof)
-			end
-	  end
-		non_nil = non_nil.sort_by { |prof| prof.user.name.split(' ').last }
-		@profiles = non_nil + is_nil
+    # Gets list of users
     @users = Array.new
     Profile.all.each do |x|
       if !(x.user.nil?)
-        @users.push(x.user.name)
+        @users.push([x.user.name, x.user.id])
       end
     end
 
