@@ -16,8 +16,9 @@
     %h1= "User Timesheets"
     - for i in 0..@profiles.length()-1 do
         - if !(@profiles[i].user_id.nil?)
-            - if @manager_user and !@admin_user
-                - if ( (@profiles[i].org == @manager_prof.org and @profiles[i].org != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org and @profiles[i].org2 != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org == @manager_prof.org2 and @profiles[i].org != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org2 and @profiles[i].org2 != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name))
+            -if !(@archived_users.include?(@profiles[i].user.name))
+                - if @manager_user and !@admin_user
+                    - if ( (@profiles[i].org == @manager_prof.org and @profiles[i].org != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org and @profiles[i].org2 != "" and @manager_prof.org != "" and @manager_orgs[@manager_prof.org] == @manager_prof.user.name) or (@profiles[i].org == @manager_prof.org2 and @profiles[i].org != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name) or (@profiles[i].org2 == @manager_prof.org2 and @profiles[i].org2 != "" and @manager_prof.org2 != "" and @manager_orgs[@manager_prof.org2] == @manager_prof.user.name))
+                        %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)
+                - else
                     %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)
-            - else
-                %li= link_to @profiles[i].user.name, timetables_user_path(@profiles[i].user.id.to_s)

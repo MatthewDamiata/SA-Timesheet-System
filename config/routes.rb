@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   match 'timetables/admin/:id/new', :as => 'user_new_timetable', :to => 'timetables#user_new', :via => [:get, :post]
   match 'timetables/admin/:id/:table_id', :as => 'timetables_user_edit', :to => 'timetables#user_edit', :via => [:get, :post]
   delete 'timetables/admin/:id/:table_id', :to => 'timetables#user_destroy'
+  match 'timetables/admin_archive', :as => 'timetables_admin_archive', :via => [:get, :post]
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

@@ -1,6 +1,7 @@
 require 'date'
 require 'active_support/time'
 require 'socket'
+require 'csv'
 
 class TimetablesController < ApplicationController
 	before_action :set_timetable, only: [:show, :edit, :update, :destroy]
@@ -90,7 +91,7 @@ class TimetablesController < ApplicationController
   def update
     Time.zone = 'Eastern Time (US & Canada)'
     if @timetable.update(timetable_params)
-      redirect_to timetables_path, notice: 'Timetable was successfully updated.'
+      redirect_to timetables_path,notice: 'Timetable was successfully updated.'
     end
   end
 
@@ -105,7 +106,18 @@ class TimetablesController < ApplicationController
   # GET /timetables/admin
   def admin
     Time.zone = 'Eastern Time (US & Canada)'
+
+    #Checks if current user is an admin
 		@admin_user = admins.to_s.include? current_user.email.to_s
+
+    # Gets list of archived users
+    @archived_users = Array.new
+    file = CSV.read('db/archived_users.csv')
+    file.each do |row|
+      @archived_users.push(row[0])
+    end
+
+    # Gets list of user profiles & users' names
     @profiles = (Profile.all.collect{|prof| prof})
 		non_nil = Array.new
 		is_nil = Array.new
@@ -121,10 +133,15 @@ class TimetablesController < ApplicationController
     @users = Array.new
     Profile.all.each do |x|
       if !(x.user.nil?)
-        @users.push(x.user.name)
+        if !(@archived_users.include? x.user.name)
+          @users.push(x.user.name)
+        end
       end
     end
+
+    # Gets list of organization names
     @allOrgs = Organization.all.collect{|org| org.name}
+
     manager_user
   end
 
@@ -210,6 +227,50 @@ class TimetablesController < ApplicationController
     @timetable.destroy
 		flash[:notice]= 'Timetable was successfully destroyed.'
     redirect_to timetables_user_url
+  end
+
+  # GET /timetables/admin/archive
+  def admin_archive
+    Time.zone = 'Eastern Time (US & Canada)'
+
+    # Checks if current user is an admin
+    @admin_user = admins.to_s.include? current_user.email.to_s
+
+    # Gets list of user profiles & users' names
+    @profiles = (Profile.all.collect{|prof| prof})
+		non_nil = Array.new
+		is_nil = Array.new
+		@profiles.each do |prof|
+			if !(prof.user.nil?)
+        non_nil.push(prof)
+			else
+				is_nil.push(prof)
+			end
+	  end
+		non_nil = non_nil.sort_by { |prof| prof.user.name.split(' ').last }
+		@profiles = non_nil + is_nil
+    @users = Array.new
+    Profile.all.each do |x|
+      if !(x.user.nil?)
+        @users.push(x.user.name)
+      end
+    end
+
+    # Gets list of archived usrs
+    @archived_users = Array.new
+    file = CSV.read('db/archived_users.csv')
+    file.each do |row|
+      @archived_users.push(row[0])
+    end
+
+    # Addes user to archived users
+    if(!(params[:archive_user].nil?) and !(@archived_users.include?(params[:archive_user])))
+      archive_user = params[:archive_user]
+      CSV.open("db/archived_users.csv", "a+") do |csv|
+        csv << [archive_user]
+      end
+    end
+    manager_user
   end
 
   private

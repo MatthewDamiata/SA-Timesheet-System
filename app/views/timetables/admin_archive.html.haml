@@ -1,0 +1,10 @@
+= link_to 'Back to Dashboard', timetables_path, class: 'btn btn-light bg-dark text-light white'
+%br
+%br
+= form_tag do
+    - if !@manager_user or @admin_user
+        %h1= "Archive User"
+        = select_tag "archive_user",options_for_select(@users), prompt: "Select a user"
+        %br
+        %br        
+        = submit_tag 'Save', :class => 'btn bg-dark text-light white'
