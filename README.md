@@ -13,7 +13,7 @@ New [timesheet](https://time.binghamtonsa.org) is now live!
 2. Run `$ bundle install --without production`
 3. Create an [OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) on GitHub
 4. Run `$ bundle exec figaro install`
-5. Edit `config/application.yml` to include the GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET
+5. Edit `config/application.yml` to include the GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
 6. Run `$ rake db:migrate` and `$ rake db:migrate RAILS_ENV=test`
 7. Run `$ rails s -b 0.0.0.0` and visit the local server
 
