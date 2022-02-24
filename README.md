@@ -22,5 +22,5 @@ New [timesheet](https://time.binghamtonsa.org) is now live!
 1. Run `$ heroku login -i` and `$ heroku create`
 2. Then push from GitHub to Heroku with `$ git push heroku main`
 3. Create a new OAuth app with links/callbacks to the new Heroku production link
-3. Add new OAuth keys to Heroku with `$ heroku config:set GITHUB_CLIENT_ID=xxxxxx` for GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+3. Add new OAuth keys to Heroku with `$ heroku config:set GOOGLE_CLIENT_ID=xxxxxx` for GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
 4. Visit the website with the link Heroku provides
