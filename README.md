@@ -3,7 +3,7 @@
 
 The current timesheet system that the SA uses has many faults in their UI, permissions, ease of use, and has an inability for users to edit previous responses (adding hours). Our goal is to create a new timesheet system without the previous faults for SA workers to clock in and clock out their hours to get paid accurately.
 
-There is now a wiki on the repo for insight into the codebase, features to be implemented, and current known bugs.
+There is now a [wiki](https://github.com/MatthewDamiata/SA-Timesheet-System/wiki) on the repo for insight into the codebase, features to be implemented, and current known bugs.
 
 New [timesheet](https://time.binghamtonsa.org) is now live!
 
