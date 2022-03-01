@@ -1,9 +1,11 @@
 # SA Timesheet System
 
 ## Contributors
-Lead: Matthew Damiata
-Maintenance: Dyandra Allen, Mrunmayee Kulkarni, Yash Mittal
-Infrastructure & Backend: Korhan Citlak, Ethan Breban, Benjamin Keurian, Joshua Szachar
+**Lead:** Matthew Damiata
+
+**Maintenance:** Dyandra Allen, Mrunmayee Kulkarni, Yash Mittal
+
+**Infrastructure & Backend:** Korhan Citlak, Ethan Breban, Benjamin Keurian, Joshua Szachar
 
 ## Announcements
 New [timesheet](https://time.binghamtonsa.org) is now live!
