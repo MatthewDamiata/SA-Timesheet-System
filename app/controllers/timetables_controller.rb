@@ -130,6 +130,13 @@ class TimetablesController < ApplicationController
 	  end
 		non_nil = non_nil.sort_by { |prof| prof.user.name.split(' ').last }
 
+    @profiles.each do |prof|
+      names = prof.user.name.split
+      firstname = names.first
+      lastname = names.last
+      prof.user.name = lastname 
+    end
+
 		@profiles = non_nil + is_nil
     @users = Array.new
     Profile.all.each do |x|
