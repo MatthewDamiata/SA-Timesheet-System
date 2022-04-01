@@ -10,7 +10,7 @@
       = image_tag "SAlogo.png"
       .banner_text
         - unless @action == 'login'
-          - if (!@admin_user || !@manager_user)
+          - if (@admin_user || @manager_user)
             = button_to " Archive Users", timetables_admin_archive_path, class: "btn btn-light bg-dark text-light white"
             = button_to " View Users", timetables_admin_path, class: "btn btn-light bg-dark text-light white"
           = button_to " Log Out", logout_path, class: "btn btn-light bg-dark text-light white"
