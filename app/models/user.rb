@@ -22,6 +22,6 @@
   end
 
   def self.find_with_auth_hash info
-    User.find_by(name: info['name'], email: info['email'])
+    User.find_by(email: info['email'])
   end
 end
